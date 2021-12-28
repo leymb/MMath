@@ -25,9 +25,9 @@ public:
 	Vec3D& operator *= (float a_Multiplier);
 	Vec3D& operator /= (float a_Divisor);
 
-	float operator [] (int a_Index);
+	float operator [] (int a_Index) const;
 
-	float SquaredMagnitude();
+	float SquaredMagnitude() const;
 	float Magnitude();
 
 	float Dot(Vec3D a_Vec3D) const;
@@ -35,4 +35,6 @@ public:
 	float ScalarTriple(Vec3D a_VecB, Vec3D a_VecC) const;
 
 	void Normalize();
+
+	Vec3D ProjectOn(Vec3D a_VecB) const;
 };

@@ -91,12 +91,12 @@ Vec3D& Vec3D::operator/=(const float a_Divisor)
 	return *this;
 }
 
-float Vec3D::operator[](int a_Index)
+float Vec3D::operator[](int a_Index) const
 {
 	return (&m_X)[a_Index];
 }
 
-float Vec3D::SquaredMagnitude()
+float Vec3D::SquaredMagnitude() const
 {
 	return m_X * m_X + m_Y * m_Y + m_Z * m_Z;
 }
@@ -106,7 +106,7 @@ float Vec3D::Magnitude()
 	return sqrt(SquaredMagnitude());
 }
 
-float Vec3D::Dot(Vec3D a_Vec3D) const
+float Vec3D::Dot(const Vec3D a_Vec3D) const
 {
 	return
 			  this->m_X * a_Vec3D.m_X
@@ -114,7 +114,7 @@ float Vec3D::Dot(Vec3D a_Vec3D) const
 			+ this->m_Z * a_Vec3D.m_Z;
 }
 
-Vec3D Vec3D::Cross(Vec3D a_Vec3D) const
+Vec3D Vec3D::Cross(const Vec3D a_Vec3D) const
 {
 	return{
 		this->m_Y * a_Vec3D.m_Z - this->m_Z * a_Vec3D.m_Y,
@@ -130,14 +130,28 @@ Vec3D Vec3D::Cross(Vec3D a_Vec3D) const
 /// <param name="a_VecB">The second Vector</param>
 /// <param name="a_VecC">The third Vector</param>
 /// <returns></returns>
-float Vec3D::ScalarTriple(Vec3D a_VecB, Vec3D a_VecC) const
+float Vec3D::ScalarTriple(const Vec3D a_VecB, const Vec3D a_VecC) const
 {
 	return this->Dot(a_VecB.Cross(a_VecC));
 }
 
+/// <summary>
+/// Normalizes the vector, resulting in a unit vector
+///	that has a magnitude = 1.0f.
+/// </summary>
 void Vec3D::Normalize()
 {
 	const float t_Divisor = 1.f/Magnitude();
 	*this *= t_Divisor;
+}
+
+/// <summary>
+/// Projects this vector on the parameter VecB.
+/// </summary>
+/// <param name="a_VecB"></param>
+/// <returns></returns>
+Vec3D Vec3D::ProjectOn(const Vec3D a_VecB) const
+{
+	return a_VecB * (this->Dot(a_VecB)/a_VecB.Dot(a_VecB));
 }
 

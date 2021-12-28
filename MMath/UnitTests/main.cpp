@@ -143,13 +143,24 @@ TEST(Vector_Basic_Ops, Basic_Calculations)
 	EXPECT_FLOAT_EQ(t_TestVector.Magnitude(), 1.0f);
 
 	// scalar triple product
-	const Vec3D t_VecA = {5.f, 6.f, 2.f};
-	const Vec3D t_VecB = {10000000000000.f, 200000000000.f, 98734928734.f};
+	Vec3D t_VecA = {5.f, 6.f, 2.f};
+	Vec3D t_VecB = {10000000000000.f, 200000000000.f, 98734928734.f};
 	const Vec3D t_VecC = {0.00001f, 0.0000032f, 0.98734928734f};
 
 	const float t_ScalarTriple = t_VecA.ScalarTriple(t_VecB, t_VecC);
 	
 	EXPECT_FLOAT_EQ(t_ScalarTriple, -5.82535458f * powf(10.0, 13.f));
+
+	// projection
+	t_VecA = {5.f, 6.7f, 10.f};
+	t_VecB = {10.f, 0.0f, 0.0f};
+
+	Vec3D t_Projection = t_VecA.ProjectOn(t_VecB);
+	EXPECT_FLOAT_EQ(t_Projection.m_X, 5.0f);
+	EXPECT_FLOAT_EQ(t_Projection.m_Y, 0.0f);
+	EXPECT_FLOAT_EQ(t_Projection.m_Z, 0.0f);
+	EXPECT_FLOAT_EQ(t_Projection.m_W, 0.0f);
+
 }
 
 int main(int argc, char* argv[])
