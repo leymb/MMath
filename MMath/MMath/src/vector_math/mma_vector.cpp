@@ -123,6 +123,18 @@ Vec3D Vec3D::Cross(Vec3D a_Vec3D) const
 	};
 }
 
+/// <summary>
+/// Calculates the scalar triple product in the form of
+///	[this, VecB, VecC] = this.Dot(VecB.Cross(VecC))
+/// </summary>
+/// <param name="a_VecB">The second Vector</param>
+/// <param name="a_VecC">The third Vector</param>
+/// <returns></returns>
+float Vec3D::ScalarTriple(Vec3D a_VecB, Vec3D a_VecC) const
+{
+	return this->Dot(a_VecB.Cross(a_VecC));
+}
+
 void Vec3D::Normalize()
 {
 	const float t_Divisor = 1.f/Magnitude();
