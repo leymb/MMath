@@ -161,6 +161,13 @@ TEST(Vector_Basic_Ops, Basic_Calculations)
 	EXPECT_FLOAT_EQ(t_Projection.m_Z, 0.0f);
 	EXPECT_FLOAT_EQ(t_Projection.m_W, 0.0f);
 
+	// rejection
+	Vec3D t_Rejection = t_VecA.Reject(t_VecB);
+	EXPECT_FLOAT_EQ(t_Rejection.m_X, 0.f);
+	EXPECT_FLOAT_EQ(t_Rejection.m_Y, 6.7f);
+	EXPECT_FLOAT_EQ(t_Rejection.m_Z, 10.0f);
+	EXPECT_FLOAT_EQ(t_Rejection.m_W, 0.0f);
+
 }
 
 int main(int argc, char* argv[])

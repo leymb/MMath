@@ -155,3 +155,15 @@ Vec3D Vec3D::ProjectOn(const Vec3D a_VecB) const
 	return a_VecB * (this->Dot(a_VecB)/a_VecB.Dot(a_VecB));
 }
 
+/// <summary>
+/// Rejects this vector from the vector specified in the parameters by
+///	subtracting the projection from the original vector. 
+/// </summary>
+/// <param name="a_VecB">Vector to form </param>
+/// <returns>A Vec3D that represents the rejection (perpendicular part) 
+/// of this vector from VecB</returns>
+Vec3D Vec3D::Reject(const Vec3D& a_VecB) const
+{
+	return *this - ProjectOn(a_VecB);
+}
+

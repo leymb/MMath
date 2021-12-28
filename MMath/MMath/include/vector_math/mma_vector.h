@@ -37,4 +37,5 @@ public:
 	void Normalize();
 
 	Vec3D ProjectOn(Vec3D a_VecB) const;
+	Vec3D Reject(const Vec3D& a_Vec3D) const;
 };
