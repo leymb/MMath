@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include <vector_math/mma_vector.h>
+#include <matrix_math/mma_mat3.h>
 
 TEST(Vector_Basic_Ops, Constructors)
 {
@@ -168,6 +169,165 @@ TEST(Vector_Basic_Ops, Basic_Calculations)
 	EXPECT_FLOAT_EQ(t_Rejection.m_Z, 10.0f);
 	EXPECT_FLOAT_EQ(t_Rejection.m_W, 0.0f);
 
+}
+
+TEST(Matrix_Basic_Ops, Constructors)
+{
+	// default constructor
+	Mat3 t_TestMat = {};
+	{
+		EXPECT_FLOAT_EQ(t_TestMat(0,0), 0.0f);
+		EXPECT_FLOAT_EQ(t_TestMat(0,1), 0.0f);
+		EXPECT_FLOAT_EQ(t_TestMat(0,2), 0.0f);
+		EXPECT_FLOAT_EQ(t_TestMat(1,0), 0.0f);
+		EXPECT_FLOAT_EQ(t_TestMat(1,1), 0.0f);
+		EXPECT_FLOAT_EQ(t_TestMat(1,2), 0.0f);
+		EXPECT_FLOAT_EQ(t_TestMat(2,0), 0.0f);
+		EXPECT_FLOAT_EQ(t_TestMat(2,1), 0.0f);
+		EXPECT_FLOAT_EQ(t_TestMat(2,2), 0.0f);
+	}
+
+	// diagonal constructor
+	float t_Diagonal = 1.0f;
+	t_TestMat = {t_Diagonal};
+
+	{
+		EXPECT_FLOAT_EQ(t_TestMat(0,0), t_Diagonal);
+		EXPECT_FLOAT_EQ(t_TestMat(0,1), 0.0f);
+		EXPECT_FLOAT_EQ(t_TestMat(0,2), 0.0f);
+		EXPECT_FLOAT_EQ(t_TestMat(1,0), 0.0f);
+		EXPECT_FLOAT_EQ(t_TestMat(1,1), t_Diagonal);
+		EXPECT_FLOAT_EQ(t_TestMat(1,2), 0.0f);
+		EXPECT_FLOAT_EQ(t_TestMat(2,0), 0.0f);
+		EXPECT_FLOAT_EQ(t_TestMat(2,1), 0.0f);
+		EXPECT_FLOAT_EQ(t_TestMat(2,2), t_Diagonal);
+
+		t_Diagonal = 10000000000000000.0f;
+		t_TestMat = {t_Diagonal};
+		EXPECT_FLOAT_EQ(t_TestMat(0,0), t_Diagonal);
+		EXPECT_FLOAT_EQ(t_TestMat(0,1), 0.0f);
+		EXPECT_FLOAT_EQ(t_TestMat(0,2), 0.0f);
+		EXPECT_FLOAT_EQ(t_TestMat(1,0), 0.0f);
+		EXPECT_FLOAT_EQ(t_TestMat(1,1), t_Diagonal);
+		EXPECT_FLOAT_EQ(t_TestMat(1,2), 0.0f);
+		EXPECT_FLOAT_EQ(t_TestMat(2,0), 0.0f);
+		EXPECT_FLOAT_EQ(t_TestMat(2,1), 0.0f);
+		EXPECT_FLOAT_EQ(t_TestMat(2,2), t_Diagonal);
+
+		t_Diagonal = 0.00000000008f;
+		t_TestMat = {t_Diagonal};
+		EXPECT_FLOAT_EQ(t_TestMat(0,0), t_Diagonal);
+		EXPECT_FLOAT_EQ(t_TestMat(0,1), 0.0f);
+		EXPECT_FLOAT_EQ(t_TestMat(0,2), 0.0f);
+		EXPECT_FLOAT_EQ(t_TestMat(1,0), 0.0f);
+		EXPECT_FLOAT_EQ(t_TestMat(1,1), t_Diagonal);
+		EXPECT_FLOAT_EQ(t_TestMat(1,2), 0.0f);
+		EXPECT_FLOAT_EQ(t_TestMat(2,0), 0.0f);
+		EXPECT_FLOAT_EQ(t_TestMat(2,1), 0.0f);
+		EXPECT_FLOAT_EQ(t_TestMat(2,2), t_Diagonal);
+	}
+
+	// individual values constructor
+	float t_00 = 1000000000.f;
+	float t_01 = 999999999.f;
+	float t_02 = 8080808089090.f;
+	float t_10 = 0.000000000098f;
+	float t_11 = 0.000000000001f;
+	float t_12 = 0.5f;
+	float t_20 = 10.f;
+	float t_21 = 3.14159265358979f;
+	float t_22 = 50.f;
+
+	t_TestMat = {
+						t_00, t_01, t_02,
+						t_10, t_11, t_12,
+						t_20, t_21, t_22
+	};
+	{
+		EXPECT_FLOAT_EQ(t_TestMat(0,0), t_00);
+		EXPECT_FLOAT_EQ(t_TestMat(0,1), t_01);
+		EXPECT_FLOAT_EQ(t_TestMat(0,2), t_02);
+		EXPECT_FLOAT_EQ(t_TestMat(1,0), t_10);
+		EXPECT_FLOAT_EQ(t_TestMat(1,1), t_11);
+		EXPECT_FLOAT_EQ(t_TestMat(1,2), t_12);
+		EXPECT_FLOAT_EQ(t_TestMat(2,0), t_20);
+		EXPECT_FLOAT_EQ(t_TestMat(2,1), t_21);
+		EXPECT_FLOAT_EQ(t_TestMat(2,2), t_22);
+	}
+
+	// three Vec3Ds constructor
+	Vec3D t_VecA = {5.f, 6.f, 7.f};
+	Vec3D t_VecB = {1000000.f, 6009605.f, 999999999.f};
+	Vec3D t_VecC = {0.0000123f, 0000989980.f, 0.0000000001f};
+
+	t_TestMat = {t_VecA, t_VecB, t_VecC};
+	{
+		EXPECT_FLOAT_EQ(t_TestMat(0,0), t_VecA.m_X);
+		EXPECT_FLOAT_EQ(t_TestMat(0,1), t_VecA.m_Y);
+		EXPECT_FLOAT_EQ(t_TestMat(0,2), t_VecA.m_Z);
+
+		EXPECT_FLOAT_EQ(t_TestMat(1,0), t_VecB.m_X);
+		EXPECT_FLOAT_EQ(t_TestMat(1,1), t_VecB.m_Y);
+		EXPECT_FLOAT_EQ(t_TestMat(1,2), t_VecB.m_Z);
+
+		EXPECT_FLOAT_EQ(t_TestMat(2,0), t_VecC.m_X);
+		EXPECT_FLOAT_EQ(t_TestMat(2,1), t_VecC.m_Y);
+		EXPECT_FLOAT_EQ(t_TestMat(2,2), t_VecC.m_Z);
+	}
+}
+
+TEST(Matrix_Basic_Ops, Operators)
+{
+	Vec3D t_VecA = {5.f, 6.f, 7.f};
+	Vec3D t_VecB = {1000000.f, 6009605.f, 999999999.f};
+	Vec3D t_VecC = {0.0000123f, 0000989980.f, 0.0000000001f};
+
+	Mat3 t_TestMat = {t_VecA, t_VecB, t_VecC};
+
+	// () operator
+	{
+		EXPECT_FLOAT_EQ(t_TestMat(0,0), t_VecA.m_X);
+		EXPECT_FLOAT_EQ(t_TestMat(0,1), t_VecA.m_Y);
+		EXPECT_FLOAT_EQ(t_TestMat(0,2), t_VecA.m_Z);
+
+		EXPECT_FLOAT_EQ(t_TestMat(1,0), t_VecB.m_X);
+		EXPECT_FLOAT_EQ(t_TestMat(1,1), t_VecB.m_Y);
+		EXPECT_FLOAT_EQ(t_TestMat(1,2), t_VecB.m_Z);
+
+		EXPECT_FLOAT_EQ(t_TestMat(2,0), t_VecC.m_X);
+		EXPECT_FLOAT_EQ(t_TestMat(2,1), t_VecC.m_Y);
+		EXPECT_FLOAT_EQ(t_TestMat(2,2), t_VecC.m_Z);
+	}
+
+	// [] operator
+	{
+		EXPECT_FLOAT_EQ(t_TestMat[0].m_X, t_VecA.m_X);
+		EXPECT_FLOAT_EQ(t_TestMat[0].m_Y, t_VecA.m_Y);
+		EXPECT_FLOAT_EQ(t_TestMat[0].m_Z, t_VecA.m_Z);
+
+		EXPECT_FLOAT_EQ(t_TestMat[1].m_X, t_VecB.m_X);
+		EXPECT_FLOAT_EQ(t_TestMat[1].m_Y, t_VecB.m_Y);
+		EXPECT_FLOAT_EQ(t_TestMat[1].m_Z, t_VecB.m_Z);
+
+		EXPECT_FLOAT_EQ(t_TestMat[2].m_X, t_VecC.m_X);
+		EXPECT_FLOAT_EQ(t_TestMat[2].m_Y, t_VecC.m_Y);
+		EXPECT_FLOAT_EQ(t_TestMat[2].m_Z, t_VecC.m_Z);
+	}
+
+	// [][] operator
+	{
+		EXPECT_FLOAT_EQ(t_TestMat[0][0], t_VecA.m_X);
+		EXPECT_FLOAT_EQ(t_TestMat[0][1], t_VecA.m_Y);
+		EXPECT_FLOAT_EQ(t_TestMat[0][2], t_VecA.m_Z);
+
+		EXPECT_FLOAT_EQ(t_TestMat[1][0], t_VecB.m_X);
+		EXPECT_FLOAT_EQ(t_TestMat[1][1], t_VecB.m_Y);
+		EXPECT_FLOAT_EQ(t_TestMat[1][2], t_VecB.m_Z);
+
+		EXPECT_FLOAT_EQ(t_TestMat[2][0], t_VecC.m_X);
+		EXPECT_FLOAT_EQ(t_TestMat[2][1], t_VecC.m_Y);
+		EXPECT_FLOAT_EQ(t_TestMat[2][2], t_VecC.m_Z);
+	}
 }
 
 int main(int argc, char* argv[])

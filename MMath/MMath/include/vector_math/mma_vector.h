@@ -30,6 +30,7 @@ public:
 	float SquaredMagnitude() const;
 	float Magnitude();
 
+	// TODO: pass by reference where possible
 	float Dot(Vec3D a_Vec3D) const;
 	Vec3D Cross(Vec3D a_Vec3D) const;
 	float ScalarTriple(Vec3D a_VecB, Vec3D a_VecC) const;

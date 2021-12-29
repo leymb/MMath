@@ -24,6 +24,9 @@
     <ClInclude Include="include\vector_math\mma_vector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\matrix_math\mma_mat3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MMath.cpp">
@@ -33,6 +36,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\vector_math\mma_vector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\matrix_math\mma_mat3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
