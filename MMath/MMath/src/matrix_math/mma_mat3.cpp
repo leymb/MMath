@@ -22,16 +22,15 @@ Mat3::Mat3(float a_Diagonal)
 Mat3::Mat3(Vec3D& a_VecA, Vec3D& a_VecB, Vec3D& a_VecC)
 {
 	m_NM_[0][0] = a_VecA.m_X;
-	m_NM_[1][0] = a_VecA.m_Y;
-	m_NM_[2][0] = a_VecA.m_Z;
+	m_NM_[0][1] = a_VecA.m_Y;
+	m_NM_[0][2] = a_VecA.m_Z;
 
-	m_NM_[0][1] = a_VecB.m_X;
+	m_NM_[1][0] = a_VecB.m_X;
 	m_NM_[1][1] = a_VecB.m_Y;
-	m_NM_[2][1] = a_VecB.m_Z;
+	m_NM_[1][2] = a_VecB.m_Z;
 
-
-	m_NM_[0][2] = a_VecC.m_X;
-	m_NM_[1][2] = a_VecC.m_Y;
+	m_NM_[2][0] = a_VecC.m_X;
+	m_NM_[2][1] = a_VecC.m_Y;
 	m_NM_[2][2] = a_VecC.m_Z;
 }
 
@@ -58,7 +57,7 @@ float& Mat3::operator()(const int n, const int m)
 }
 
 // TODO: Make this return a vector that references the values for easy access
-Vec3D Mat3::operator[](const int i)
+Vec3D& Mat3::operator[](const int i)
 {
-	return {m_NM_[0][i], m_NM_[1][i], m_NM_[2][i]};
+	return *reinterpret_cast<Vec3D *>(m_NM_[i]);
 }

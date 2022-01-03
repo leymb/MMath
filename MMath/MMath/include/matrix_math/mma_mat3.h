@@ -21,9 +21,18 @@ public:
 
 
 	float& operator()(int n, int m);
-	Vec3D operator[](int i);
+	Vec3D& operator[](int i);
 
 	// TODO: add mathematical operators
+	Mat3& operator*=(Mat3& a_Mat3);
+	Mat3& operator*=(Vec3D& a_Vec3D);
+	Mat3& operator+=(Mat3& a_Mat3);
+	Mat3& operator-=(Mat3& a_Mat3);
+
+	Mat3 operator*(Mat3& a_Mat3);
+	Mat3 operator*(Vec3D& a_Vec3D);
+	Mat3 operator+(Mat3& a_Mat3);
+	Mat3 operator-(Mat3& a_Mat3);
 
 private:
 	float m_NM_[3][3] = {0.0f};

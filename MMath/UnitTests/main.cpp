@@ -263,15 +263,15 @@ TEST(Matrix_Basic_Ops, Constructors)
 	t_TestMat = {t_VecA, t_VecB, t_VecC};
 	{
 		EXPECT_FLOAT_EQ(t_TestMat(0,0), t_VecA.m_X);
-		EXPECT_FLOAT_EQ(t_TestMat(0,1), t_VecA.m_Y);
-		EXPECT_FLOAT_EQ(t_TestMat(0,2), t_VecA.m_Z);
+		EXPECT_FLOAT_EQ(t_TestMat(1,0), t_VecA.m_Y);
+		EXPECT_FLOAT_EQ(t_TestMat(2,0), t_VecA.m_Z);
 
-		EXPECT_FLOAT_EQ(t_TestMat(1,0), t_VecB.m_X);
+		EXPECT_FLOAT_EQ(t_TestMat(0,1), t_VecB.m_X);
 		EXPECT_FLOAT_EQ(t_TestMat(1,1), t_VecB.m_Y);
-		EXPECT_FLOAT_EQ(t_TestMat(1,2), t_VecB.m_Z);
+		EXPECT_FLOAT_EQ(t_TestMat(2,1), t_VecB.m_Z);
 
-		EXPECT_FLOAT_EQ(t_TestMat(2,0), t_VecC.m_X);
-		EXPECT_FLOAT_EQ(t_TestMat(2,1), t_VecC.m_Y);
+		EXPECT_FLOAT_EQ(t_TestMat(0,2), t_VecC.m_X);
+		EXPECT_FLOAT_EQ(t_TestMat(1,2), t_VecC.m_Y);
 		EXPECT_FLOAT_EQ(t_TestMat(2,2), t_VecC.m_Z);
 	}
 }
@@ -287,15 +287,15 @@ TEST(Matrix_Basic_Ops, Operators)
 	// () operator
 	{
 		EXPECT_FLOAT_EQ(t_TestMat(0,0), t_VecA.m_X);
-		EXPECT_FLOAT_EQ(t_TestMat(0,1), t_VecA.m_Y);
-		EXPECT_FLOAT_EQ(t_TestMat(0,2), t_VecA.m_Z);
+		EXPECT_FLOAT_EQ(t_TestMat(1,0), t_VecA.m_Y);
+		EXPECT_FLOAT_EQ(t_TestMat(2,0), t_VecA.m_Z);
 
-		EXPECT_FLOAT_EQ(t_TestMat(1,0), t_VecB.m_X);
+		EXPECT_FLOAT_EQ(t_TestMat(0,1), t_VecB.m_X);
 		EXPECT_FLOAT_EQ(t_TestMat(1,1), t_VecB.m_Y);
-		EXPECT_FLOAT_EQ(t_TestMat(1,2), t_VecB.m_Z);
+		EXPECT_FLOAT_EQ(t_TestMat(2,1), t_VecB.m_Z);
 
-		EXPECT_FLOAT_EQ(t_TestMat(2,0), t_VecC.m_X);
-		EXPECT_FLOAT_EQ(t_TestMat(2,1), t_VecC.m_Y);
+		EXPECT_FLOAT_EQ(t_TestMat(0,2), t_VecC.m_X);
+		EXPECT_FLOAT_EQ(t_TestMat(1,2), t_VecC.m_Y);
 		EXPECT_FLOAT_EQ(t_TestMat(2,2), t_VecC.m_Z);
 	}
 
