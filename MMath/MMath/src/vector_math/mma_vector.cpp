@@ -3,19 +3,15 @@
 
 #include <cmath>
 
-Vec3D::Vec3D() : m_X(0.0f), m_Y(0.0f), m_Z(0.0f), m_W(0.0f)
+Vec3D::Vec3D() : m_X(0.0f), m_Y(0.0f), m_Z(0.0f)
 {
 }
 
-Vec3D::Vec3D(float a_Value) : m_X(a_Value), m_Y(a_Value), m_Z(a_Value), m_W(0.0f)
+Vec3D::Vec3D(float a_Value) : m_X(a_Value), m_Y(a_Value), m_Z(a_Value)
 {
 }
 
-Vec3D::Vec3D(float x, float y, float z) : m_X(x), m_Y(y), m_Z(z), m_W(0.0f)
-{
-}
-
-Vec3D::Vec3D(float x, float y, float z, float w) :  m_X(x), m_Y(y), m_Z(z), m_W(w)
+Vec3D::Vec3D(float x, float y, float z) : m_X(x), m_Y(y), m_Z(z)
 {
 }
 

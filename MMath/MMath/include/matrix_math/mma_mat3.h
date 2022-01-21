@@ -1,8 +1,8 @@
 #pragma once
 
-// || M00 | M01 | M02 ||
-// || M10 | M11 | M12 ||
-// || M20 | M21 | M22 ||
+// || M00 | M10 | M20 ||
+// || M01 | M11 | M21 ||
+// || M02 | M12 | M22 ||
 
 /// <summary>
 /// A column-major 3 x 3 (n x m) matrix

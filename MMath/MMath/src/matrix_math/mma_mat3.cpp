@@ -53,11 +53,49 @@ Mat3::Mat3(const float a_00, const float a_01, const float a_02,
 
 float& Mat3::operator()(const int n, const int m)
 {
-	return (m_NM_[m][n]);
+	return (m_NM_[n][m]);
 }
 
 // TODO: Make this return a vector that references the values for easy access
 Vec3D& Mat3::operator[](const int i)
 {
 	return *reinterpret_cast<Vec3D *>(m_NM_[i]);
+}
+
+Mat3& Mat3::operator+=(Mat3& a_Mat3)
+{
+	m_NM_[0][0] += a_Mat3[0][0];
+	m_NM_[0][1] += a_Mat3[0][1];
+	m_NM_[0][2] += a_Mat3[0][2];
+
+	m_NM_[1][0] += a_Mat3[1][0];
+	m_NM_[1][1] += a_Mat3[1][1];
+	m_NM_[1][2] += a_Mat3[1][2];
+
+	m_NM_[2][0] += a_Mat3[2][0];
+	m_NM_[2][1] += a_Mat3[2][1];
+	m_NM_[2][2] += a_Mat3[2][2];
+
+	return *this;
+}
+
+Mat3 Mat3::operator+(Mat3& a_Mat3)
+{
+	float t_00 = m_NM_[0][0] + a_Mat3[0][0];
+	float t_10 = m_NM_[1][0] + a_Mat3[1][0];
+	float t_20 = m_NM_[2][0] + a_Mat3[2][0];
+
+	float t_01 = m_NM_[0][1] + a_Mat3[0][1];
+	float t_11 = m_NM_[1][1] + a_Mat3[1][1];
+	float t_21 = m_NM_[2][1] + a_Mat3[2][1];
+
+	float t_02 = m_NM_[0][2] + a_Mat3[0][2];
+	float t_12 = m_NM_[1][2] + a_Mat3[1][2];
+	float t_22 = m_NM_[2][2] + a_Mat3[2][2];
+
+	return {
+				t_00, t_10, t_20,
+				t_01, t_11, t_21,
+				t_02, t_12, t_22
+			};
 }
