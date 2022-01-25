@@ -59,6 +59,50 @@ TEST(Vector_Basic_Ops, Operators)
 	EXPECT_FLOAT_EQ(t_Product.m_Y, 1.2f * t_Multiplicator);
 	EXPECT_FLOAT_EQ(t_Product.m_Z, 3.f * t_Multiplicator);
 
+	// * operator (Mat3)
+	{
+		Mat3 t_MatA =	{
+							5.f, 6.f, 7.f,
+							1.f, 4.f, 8.f,
+							2.f, 9.f, 0.f
+						};
+
+		Vec3D t_Vec3D = 
+						{
+							10.0f,
+							666.66f,
+							0.00009f
+						};
+
+		Vec3D t_Product = t_Vec3D * t_MatA;
+
+		EXPECT_FLOAT_EQ(t_Product[0], 4049.96063f);
+		EXPECT_FLOAT_EQ(t_Product[1], 2676.64072f);
+		EXPECT_FLOAT_EQ(t_Product[2], 6019.9400f);
+	}
+
+	// *= operator (Mat3)
+	{
+		Mat3 t_MatA =	{
+							5.f, 6.f, 7.f,
+							1.f, 4.f, 8.f,
+							2.f, 9.f, 0.f
+						};
+
+		Vec3D t_Vec3D = 
+						{
+							10.0f,
+							666.66f,
+							0.00009f
+						};
+
+		t_Vec3D *= t_MatA;
+
+		EXPECT_FLOAT_EQ(t_Vec3D[0], 4049.96063f);
+		EXPECT_FLOAT_EQ(t_Vec3D[1], 2676.64072f);
+		EXPECT_FLOAT_EQ(t_Vec3D[2], 6019.9400f);
+	}
+
 	// addition
 	t_TestVector = {2.f, 10.2f, 4.f};
 	Vec3D t_Addend = 4.5f;
@@ -223,19 +267,19 @@ TEST(Matrix_Basic_Ops, Constructors)
 	float t_22 = 50.f;
 
 	t_TestMat = Mat3(
-						t_00, t_01, t_02,
-						t_10, t_11, t_12,
-						t_20, t_21, t_22
+						t_00, t_10, t_20,
+						t_01, t_11, t_21,
+						t_02, t_12, t_22
 	);
 	{
 		EXPECT_FLOAT_EQ(t_TestMat(0,0), t_00);
-		EXPECT_FLOAT_EQ(t_TestMat(1,0), t_01);
-		EXPECT_FLOAT_EQ(t_TestMat(2,0), t_02);
-		EXPECT_FLOAT_EQ(t_TestMat(0,1), t_10);
+		EXPECT_FLOAT_EQ(t_TestMat(1,0), t_10);
+		EXPECT_FLOAT_EQ(t_TestMat(2,0), t_20);
+		EXPECT_FLOAT_EQ(t_TestMat(0,1), t_01);
 		EXPECT_FLOAT_EQ(t_TestMat(1,1), t_11);
-		EXPECT_FLOAT_EQ(t_TestMat(2,1), t_12);
-		EXPECT_FLOAT_EQ(t_TestMat(0,2), t_20);
-		EXPECT_FLOAT_EQ(t_TestMat(1,2), t_21);
+		EXPECT_FLOAT_EQ(t_TestMat(2,1), t_21);
+		EXPECT_FLOAT_EQ(t_TestMat(0,2), t_02);
+		EXPECT_FLOAT_EQ(t_TestMat(1,2), t_12);
 		EXPECT_FLOAT_EQ(t_TestMat(2,2), t_22);
 	}
 
@@ -313,7 +357,7 @@ TEST(Matrix_Basic_Ops, Operators)
 		EXPECT_FLOAT_EQ(t_TestMat[2][2], t_VecC.m_Z);
 	}
 
-	// + operator
+	// + operator (Mat3)
 	{
 		Mat3 t_MatA =	{
 							5.f, 6.f, 7.f,
@@ -321,9 +365,6 @@ TEST(Matrix_Basic_Ops, Operators)
 							2.f, 9.f, 0.f
 						};
 
-		Vec3D t_Test = t_MatA[0];
-
-		assert(t_MatA(0, 1) == t_MatA[0][1]);
 
 		Mat3 t_MatB =	{
 							22.3f, 10.0f, 66.33f,
@@ -344,6 +385,31 @@ TEST(Matrix_Basic_Ops, Operators)
 		EXPECT_FLOAT_EQ(t_Sum[2][0], 7.f + 66.33f);
 		EXPECT_FLOAT_EQ(t_Sum[2][1], 8.f + 12.6f);
 		EXPECT_FLOAT_EQ(t_Sum[2][2], 0.f + 99.9f);
+	}
+
+	// + operator (float)
+	{
+		Mat3 t_MatA =	{
+							5.f, 6.f, 7.f,
+							1.f, 4.f, 8.f,
+							2.f, 9.f, 0.f
+						};
+
+		float t_Addend = 2.0;
+
+		Mat3 t_Sum = t_MatA + t_Addend;
+
+		EXPECT_FLOAT_EQ(t_Sum[0][0], t_MatA[0][0] + t_Addend);
+		EXPECT_FLOAT_EQ(t_Sum[0][1], t_MatA[0][1] + t_Addend);
+		EXPECT_FLOAT_EQ(t_Sum[0][2], t_MatA[0][2] + t_Addend);
+
+		EXPECT_FLOAT_EQ(t_Sum[1][0], t_MatA[1][0] + t_Addend);
+		EXPECT_FLOAT_EQ(t_Sum[1][1], t_MatA[1][1] + t_Addend);
+		EXPECT_FLOAT_EQ(t_Sum[1][2], t_MatA[1][2] + t_Addend);
+
+		EXPECT_FLOAT_EQ(t_Sum[2][0], t_MatA[2][0] + t_Addend);
+		EXPECT_FLOAT_EQ(t_Sum[2][1], t_MatA[2][1] + t_Addend);
+		EXPECT_FLOAT_EQ(t_Sum[2][2], t_MatA[2][2] + t_Addend);
 	}
 
 	// += operator
@@ -373,6 +439,271 @@ TEST(Matrix_Basic_Ops, Operators)
 		EXPECT_FLOAT_EQ(t_MatA[2][0], 7.f + 66.33f);
 		EXPECT_FLOAT_EQ(t_MatA[2][1], 8.f + 12.6f);
 		EXPECT_FLOAT_EQ(t_MatA[2][2], 0.f + 99.9f);
+	}
+
+	// += operator (float)
+	{
+		Mat3 t_MatA =	{
+							5.f, 6.f, 7.f,
+							1.f, 4.f, 8.f,
+							2.f, 9.f, 0.f
+						};
+
+		float t_Multiplicand = 2.0;
+
+		t_MatA += t_Multiplicand;
+
+		EXPECT_FLOAT_EQ(t_MatA[0][0], 7.f);
+		EXPECT_FLOAT_EQ(t_MatA[0][1], 3.f);
+		EXPECT_FLOAT_EQ(t_MatA[0][2], 4.f);
+
+		EXPECT_FLOAT_EQ(t_MatA[1][0], 8.f);
+		EXPECT_FLOAT_EQ(t_MatA[1][1], 6.f);
+		EXPECT_FLOAT_EQ(t_MatA[1][2], 11.f);
+
+		EXPECT_FLOAT_EQ(t_MatA[2][0], 9.f);
+		EXPECT_FLOAT_EQ(t_MatA[2][1], 10.f);
+		EXPECT_FLOAT_EQ(t_MatA[2][2], 2.f);
+	}
+
+	// - operator
+	{
+		Mat3 t_MatA =	{
+							5.f, 6.f, 7.f,
+							1.f, 4.f, 8.f,
+							2.f, 9.f, 0.f
+						};
+
+		Mat3 t_MatB =	{
+							22.3f, 10.0f, 66.33f,
+							13.2f, 11.0f, 12.6f,
+							45.5f, 78.7f, 99.9f
+						};
+
+		Mat3 t_Sum = t_MatA - t_MatB;
+
+		EXPECT_FLOAT_EQ(t_Sum[0][0], 5.f - 22.3f);
+		EXPECT_FLOAT_EQ(t_Sum[0][1], 1.f - 13.2f);
+		EXPECT_FLOAT_EQ(t_Sum[0][2], 2.f - 45.5f);
+
+		EXPECT_FLOAT_EQ(t_Sum[1][0], 6.f - 10.0f);
+		EXPECT_FLOAT_EQ(t_Sum[1][1], 4.f - 11.0f);
+		EXPECT_FLOAT_EQ(t_Sum[1][2], 9.f - 78.7f);
+
+		EXPECT_FLOAT_EQ(t_Sum[2][0], 7.f - 66.33f);
+		EXPECT_FLOAT_EQ(t_Sum[2][1], 8.f - 12.6f);
+		EXPECT_FLOAT_EQ(t_Sum[2][2], 0.f - 99.9f);
+	}
+
+	// -= operator
+	{
+		Mat3 t_MatA =	{
+							5.f, 6.f, 7.f,
+							1.f, 4.f, 8.f,
+							2.f, 9.f, 0.f
+						};
+
+		Mat3 t_MatB =	{
+							22.3f, 10.0f, 66.33f,
+							13.2f, 11.0f, 12.6f,
+							45.5f, 78.7f, 99.9f
+						};
+
+		t_MatA -= t_MatB;
+
+		EXPECT_FLOAT_EQ(t_MatA[0][0], 5.f - 22.3f);
+		EXPECT_FLOAT_EQ(t_MatA[0][1], 1.f - 13.2f);
+		EXPECT_FLOAT_EQ(t_MatA[0][2], 2.f - 45.5f);
+
+		EXPECT_FLOAT_EQ(t_MatA[1][0], 6.f - 10.0f);
+		EXPECT_FLOAT_EQ(t_MatA[1][1], 4.f - 11.0f);
+		EXPECT_FLOAT_EQ(t_MatA[1][2], 9.f - 78.7f);
+
+		EXPECT_FLOAT_EQ(t_MatA[2][0], 7.f - 66.33f);
+		EXPECT_FLOAT_EQ(t_MatA[2][1], 8.f - 12.6f);
+		EXPECT_FLOAT_EQ(t_MatA[2][2], 0.f - 99.9f);
+	}
+
+	// -= operator (float)
+	{
+		Mat3 t_MatA =	{
+							5.f, 6.f, 7.f,
+							1.f, 4.f, 8.f,
+							2.f, 9.f, 0.f
+						};
+
+		float t_Subtrahend = 10;
+
+		t_MatA -= t_Subtrahend;
+
+		EXPECT_FLOAT_EQ(t_MatA[0][0], 5.f - t_Subtrahend);
+		EXPECT_FLOAT_EQ(t_MatA[0][1], 1.f - t_Subtrahend);
+		EXPECT_FLOAT_EQ(t_MatA[0][2], 2.f - t_Subtrahend);
+
+		EXPECT_FLOAT_EQ(t_MatA[1][0], 6.f - t_Subtrahend);
+		EXPECT_FLOAT_EQ(t_MatA[1][1], 4.f - t_Subtrahend);
+		EXPECT_FLOAT_EQ(t_MatA[1][2], 9.f - t_Subtrahend);
+
+		EXPECT_FLOAT_EQ(t_MatA[2][0], 7.f - t_Subtrahend);
+		EXPECT_FLOAT_EQ(t_MatA[2][1], 8.f - t_Subtrahend);
+		EXPECT_FLOAT_EQ(t_MatA[2][2], 0.f - t_Subtrahend);
+	}
+
+	// - operator (float)
+	{
+		Mat3 t_MatA =	{
+							5.f, 6.f, 7.f,
+							1.f, 4.f, 8.f,
+							2.f, 9.f, 0.f
+						};
+
+		float t_Subtrahend = 2.0;
+
+		Mat3 t_Sum = t_MatA - t_Subtrahend;
+
+		EXPECT_FLOAT_EQ(t_Sum[0][0], t_MatA[0][0] - t_Subtrahend);
+		EXPECT_FLOAT_EQ(t_Sum[0][1], t_MatA[0][1] - t_Subtrahend);
+		EXPECT_FLOAT_EQ(t_Sum[0][2], t_MatA[0][2] - t_Subtrahend);
+
+		EXPECT_FLOAT_EQ(t_Sum[1][0], t_MatA[1][0] - t_Subtrahend);
+		EXPECT_FLOAT_EQ(t_Sum[1][1], t_MatA[1][1] - t_Subtrahend);
+		EXPECT_FLOAT_EQ(t_Sum[1][2], t_MatA[1][2] - t_Subtrahend);
+
+		EXPECT_FLOAT_EQ(t_Sum[2][0], t_MatA[2][0] - t_Subtrahend);
+		EXPECT_FLOAT_EQ(t_Sum[2][1], t_MatA[2][1] - t_Subtrahend);
+		EXPECT_FLOAT_EQ(t_Sum[2][2], t_MatA[2][2] - t_Subtrahend);
+	}
+
+
+
+	// *= operator
+	{
+		Mat3 t_MatA =	{
+							5.f, 6.f, 7.f,
+							1.f, 4.f, 8.f,
+							2.f, 9.f, 0.f
+						};
+
+		Mat3 t_MatB =	{
+							22.3f, 10.0f, 66.33f,
+							13.2f, 11.0f, 12.6f,
+							45.5f, 78.7f, 99.9f
+						};
+
+		t_MatA *= t_MatB;
+
+		EXPECT_FLOAT_EQ(t_MatA[0][0], 509.2f);
+		EXPECT_FLOAT_EQ(t_MatA[0][1], 439.1f);
+		EXPECT_FLOAT_EQ(t_MatA[0][2], 163.4f);
+
+		EXPECT_FLOAT_EQ(t_MatA[1][0], 666.9f);
+		EXPECT_FLOAT_EQ(t_MatA[1][1], 683.6f);
+		EXPECT_FLOAT_EQ(t_MatA[1][2], 119.f);
+
+		EXPECT_FLOAT_EQ(t_MatA[2][0], 1106.55f);
+		EXPECT_FLOAT_EQ(t_MatA[2][1], 915.93f);
+		EXPECT_FLOAT_EQ(t_MatA[2][2], 246.06f);
+	}
+
+	// * operator
+	{
+		Mat3 t_MatA =	{
+							5.f, 6.f, 7.f,
+							1.f, 4.f, 8.f,
+							2.f, 9.f, 0.f
+						};
+
+		Mat3 t_MatB =	{
+							22.3f, 10.0f, 66.33f,
+							13.2f, 11.0f, 12.6f,
+							45.5f, 78.7f, 99.9f
+						};
+
+		Mat3 t_Product = t_MatA * t_MatB;
+
+		EXPECT_FLOAT_EQ(t_Product[0][0], 509.2f);
+		EXPECT_FLOAT_EQ(t_Product[0][1], 439.1f);
+		EXPECT_FLOAT_EQ(t_Product[0][2], 163.4f);
+
+		EXPECT_FLOAT_EQ(t_Product[1][0], 666.9f);
+		EXPECT_FLOAT_EQ(t_Product[1][1], 683.6f);
+		EXPECT_FLOAT_EQ(t_Product[1][2], 119.f);
+
+		EXPECT_FLOAT_EQ(t_Product[2][0], 1106.55f);
+		EXPECT_FLOAT_EQ(t_Product[2][1], 915.93f);
+		EXPECT_FLOAT_EQ(t_Product[2][2], 246.06f);
+	}
+
+	// * operator (Vec3D)
+	{
+		Mat3 t_MatA =	{
+							5.f, 6.f, 7.f,
+							1.f, 4.f, 8.f,
+							2.f, 9.f, 0.f
+						};
+
+		Vec3D t_Vec3D = 
+						{
+							10.0f,
+							666.66f,
+							0.00009f
+						};
+
+		Vec3D t_Product = t_MatA * t_Vec3D;
+
+		EXPECT_FLOAT_EQ(t_Product[0], 4049.96063f);
+		EXPECT_FLOAT_EQ(t_Product[1], 2676.64072f);
+		EXPECT_FLOAT_EQ(t_Product[2], 6019.9400f);
+	}
+
+	// * operator (float)
+	{
+		Mat3 t_MatA =	{
+							5.f, 6.f, 7.f,
+							1.f, 4.f, 8.f,
+							2.f, 9.f, 0.f
+						};
+
+		float t_Multiplicand = 2.0;
+
+		Mat3 t_Product = t_MatA * t_Multiplicand;
+
+		EXPECT_FLOAT_EQ(t_Product[0][0], t_MatA[0][0] * t_Multiplicand);
+		EXPECT_FLOAT_EQ(t_Product[0][1], t_MatA[0][1] * t_Multiplicand);
+		EXPECT_FLOAT_EQ(t_Product[0][2], t_MatA[0][2] * t_Multiplicand);
+
+		EXPECT_FLOAT_EQ(t_Product[1][0], t_MatA[1][0] * t_Multiplicand);
+		EXPECT_FLOAT_EQ(t_Product[1][1], t_MatA[1][1] * t_Multiplicand);
+		EXPECT_FLOAT_EQ(t_Product[1][2], t_MatA[1][2] * t_Multiplicand);
+
+		EXPECT_FLOAT_EQ(t_Product[2][0], t_MatA[2][0] * t_Multiplicand);
+		EXPECT_FLOAT_EQ(t_Product[2][1], t_MatA[2][1] * t_Multiplicand);
+		EXPECT_FLOAT_EQ(t_Product[2][2], t_MatA[2][2] * t_Multiplicand);
+	}
+
+	// *= operator (float)
+	{
+		Mat3 t_MatA =	{
+							5.f, 6.f, 7.f,
+							1.f, 4.f, 8.f,
+							2.f, 9.f, 0.f
+						};
+
+		float t_Multiplicand = 2.0;
+
+		t_MatA *= t_Multiplicand;
+
+		EXPECT_FLOAT_EQ(t_MatA[0][0], 10.0f);
+		EXPECT_FLOAT_EQ(t_MatA[0][1], 2.f);
+		EXPECT_FLOAT_EQ(t_MatA[0][2], 4.f);
+
+		EXPECT_FLOAT_EQ(t_MatA[1][0], 12.f);
+		EXPECT_FLOAT_EQ(t_MatA[1][1], 8.f);
+		EXPECT_FLOAT_EQ(t_MatA[1][2], 18.f);
+
+		EXPECT_FLOAT_EQ(t_MatA[2][0], 14.f);
+		EXPECT_FLOAT_EQ(t_MatA[2][1], 16.f);
+		EXPECT_FLOAT_EQ(t_MatA[2][2], 0.f);
 	}
 }
 

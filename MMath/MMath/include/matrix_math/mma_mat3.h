@@ -14,10 +14,10 @@ class Mat3
 public:
 	Mat3() = default;
 	Mat3(float a_Diagonal);
-	Mat3(Vec3D& a_VecA, Vec3D& a_VecB, Vec3D& a_VecC);
-	Mat3(float a_00, float a_01, float a_02,
-		 float a_10, float a_11, float a_12,
-		 float a_20, float a_21, float a_22);
+	Mat3(const Vec3D& a_VecA, const Vec3D& a_VecB, const Vec3D& a_VecC);
+	Mat3(float a_00, float a_10, float a_20,
+		 float a_01, float a_11, float a_21,
+		 float a_02, float a_12, float a_22);
 
 
 	float& operator()(int n, int m);
@@ -25,14 +25,19 @@ public:
 
 	// TODO: add mathematical operators
 	Mat3& operator*=(Mat3& a_Mat3);
-	Mat3& operator*=(Vec3D& a_Vec3D);
+	Mat3& operator*=(float a_Multiplicand);
 	Mat3& operator+=(Mat3& a_Mat3);
 	Mat3& operator-=(Mat3& a_Mat3);
+	Mat3& operator+=(float a_Addend);
+	Mat3& operator-=(float a_Subtrahend);
 
 	Mat3 operator*(Mat3& a_Mat3);
-	Mat3 operator*(Vec3D& a_Vec3D);
+	Mat3 operator*(float a_Multiplicand);
+	Vec3D operator*(Vec3D& a_Vec3D);
 	Mat3 operator+(Mat3& a_Mat3);
+	Mat3 operator+(float a_Addend);
 	Mat3 operator-(Mat3& a_Mat3);
+	Mat3 operator-(float a_Subtrahend);
 
 private:
 	float m_NM_[3][3] = {0.0f};

@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "vector_math/mma_vector.h"
+#include "matrix_math/mma_mat3.h"
 
 #include <cmath>
 
@@ -42,6 +43,23 @@ Vec3D Vec3D::operator*(const float a_Multiplier) const
 			};
 }
 
+Vec3D Vec3D::operator*(Mat3& a_Mat3D) const
+{
+	float t_X =   a_Mat3D[0][0] * m_X
+				+ a_Mat3D[1][0] * m_Y
+				+ a_Mat3D[2][0] * m_Z;
+
+	float t_Y =   a_Mat3D[0][1] * m_X
+				+ a_Mat3D[1][1] * m_Y
+				+ a_Mat3D[2][1] * m_Z;
+
+	float t_Z =   a_Mat3D[0][2] * m_X
+				+ a_Mat3D[1][2] * m_Y
+				+ a_Mat3D[2][2] * m_Z;
+
+	return {t_X, t_Y, t_Z};
+}
+
 Vec3D Vec3D::operator/(const float a_Divisor) const
 {
 	return {
@@ -74,6 +92,27 @@ Vec3D& Vec3D::operator*=(const float a_Multiplier)
 	this->m_X *= a_Multiplier;
 	this->m_Y *= a_Multiplier;
 	this->m_Z *= a_Multiplier;
+
+	return *this;
+}
+
+Vec3D& Vec3D::operator*=(Mat3& a_Mat3D)
+{
+	const float t_X =     a_Mat3D[0][0] * m_X
+						+ a_Mat3D[1][0] * m_Y
+						+ a_Mat3D[2][0] * m_Z;
+
+	const float t_Y =     a_Mat3D[0][1] * m_X
+						+ a_Mat3D[1][1] * m_Y
+						+ a_Mat3D[2][1] * m_Z;
+
+	const float t_Z =     a_Mat3D[0][2] * m_X
+						+ a_Mat3D[1][2] * m_Y
+						+ a_Mat3D[2][2] * m_Z;
+
+	m_X = t_X;
+	m_Y = t_Y;
+	m_Z = t_Z;
 
 	return *this;
 }

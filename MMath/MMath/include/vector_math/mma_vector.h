@@ -1,5 +1,6 @@
 #pragma once
 
+class Mat3;
 class Vec3D
 {
 public:
@@ -16,11 +17,13 @@ public:
 	Vec3D operator + (const Vec3D& a_Vector) const;
 	Vec3D operator - (const Vec3D& a_Vector) const;
 	Vec3D operator * (float a_Multiplier) const;
+	Vec3D operator * (Mat3& a_Mat3D) const;
 	Vec3D operator / (float a_Divisor) const;
 
 	Vec3D& operator += (const Vec3D& a_Vector);
 	Vec3D& operator -= (const Vec3D& a_Vector);
 	Vec3D& operator *= (float a_Multiplier);
+	Vec3D& operator *= (Mat3& a_Mat3D);
 	Vec3D& operator /= (float a_Divisor);
 
 	float operator [] (int a_Index) const;
