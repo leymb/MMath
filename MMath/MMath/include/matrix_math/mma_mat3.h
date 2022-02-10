@@ -39,6 +39,9 @@ public:
 	Mat3 operator-(Mat3& a_Mat3);
 	Mat3 operator-(float a_Subtrahend);
 
+	float Det();
+
+
 private:
 	float m_NM_[3][3] = {0.0f};
 };

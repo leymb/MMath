@@ -357,3 +357,17 @@ Mat3 Mat3::operator-(float a_Subtrahend)
 				t_02, t_12, t_22
 			};
 }
+
+/// <summary>
+/// Calculates the Determinant of a given Matrix.
+/// </summary>
+/// <returns>The Determinant of the Matrix</returns>
+float Mat3::Det()
+{
+	return	  m_NM_[0][0] * m_NM_[1][1] * m_NM_[2][2]
+			+ m_NM_[0][1] * m_NM_[1][2] * m_NM_[2][0]
+			+ m_NM_[0][2] * m_NM_[1][0] * m_NM_[2][1]
+			- m_NM_[0][0] * m_NM_[1][2] * m_NM_[2][1]
+			- m_NM_[0][1] * m_NM_[1][0] * m_NM_[2][2]
+			- m_NM_[0][2] * m_NM_[1][1] * m_NM_[2][0];
+}

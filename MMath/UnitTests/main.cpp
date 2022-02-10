@@ -707,6 +707,37 @@ TEST(Matrix_Basic_Ops, Operators)
 	}
 }
 
+TEST(Matrix_Basic_Ops, Basic_Calculations)
+{
+	// Determinant
+	{
+		Mat3 t_MatA =	{
+							5.f, 6.f, 7.f,
+							1.f, 4.f, 8.f,
+							2.f, 9.f, 0.f
+						};
+
+		EXPECT_FLOAT_EQ(t_MatA.Det(), -257.f);
+
+		Mat3 t_MatB =	{
+							0.03f, 0.001f, 0.2f,
+							0.7f, 0.099f, 1.f,
+							2.33f, 4.f, 6.77f	
+						};
+
+		EXPECT_FLOAT_EQ(t_MatB.Det(), 0.4115639f);
+
+		Mat3 t_MatC =	{
+							99999999.9999f, 4239487.9f, 9832748.f,
+							1010010.19910f, 10000000.f, 45000.f,
+							6000000.f, 1000000.99988f, 420.f	
+						};
+
+		EXPECT_FLOAT_EQ(t_MatC.Det(), -5.829708355f * powf(10.f, 20.f));
+	}
+
+}
+
 int main(int argc, char* argv[])
 {
 	testing::InitGoogleTest();
