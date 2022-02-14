@@ -31,6 +31,8 @@ public:
 	Mat3& operator+=(float a_Addend);
 	Mat3& operator-=(float a_Subtrahend);
 
+	bool operator==(Mat3& a_Mat3);
+
 	Mat3 operator*(Mat3& a_Mat3);
 	Mat3 operator*(float a_Multiplicand);
 	Vec3D operator*(Vec3D& a_Vec3D);
@@ -40,6 +42,7 @@ public:
 	Mat3 operator-(float a_Subtrahend);
 
 	float Det();
+	Mat3 Inv();
 
 
 private:

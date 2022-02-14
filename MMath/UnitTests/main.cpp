@@ -705,6 +705,18 @@ TEST(Matrix_Basic_Ops, Operators)
 		EXPECT_FLOAT_EQ(t_MatA[2][1], 16.f);
 		EXPECT_FLOAT_EQ(t_MatA[2][2], 0.f);
 	}
+
+	// == operator
+	{
+		Mat3 t_MatA =	{
+							5.f, 6.f, 7.f,
+							1.f, 4.f, 8.f,
+							2.f, 9.f, 0.f
+						};
+		Mat3 t_MatB = t_MatA;
+
+		EXPECT_EQ(t_MatA == t_MatB, true);
+	}
 }
 
 TEST(Matrix_Basic_Ops, Basic_Calculations)
@@ -736,6 +748,28 @@ TEST(Matrix_Basic_Ops, Basic_Calculations)
 		EXPECT_FLOAT_EQ(t_MatC.Det(), -5.829708355f * powf(10.f, 20.f));
 	}
 
+	// Inverse
+	{
+		Mat3 t_MatA =	{
+							5.f, 6.f, 7.f,
+							1.f, 4.f, 8.f,
+							2.f, 9.f, 0.f
+						};
+
+		Mat3 t_MatInv = t_MatA.Inv();
+
+		EXPECT_FLOAT_EQ(t_MatInv[0][0], 0.280155642f);
+		EXPECT_FLOAT_EQ(t_MatInv[0][1], -0.0622568093f);
+		EXPECT_FLOAT_EQ(t_MatInv[0][2], -0.00389105058f);
+
+		EXPECT_FLOAT_EQ(t_MatInv[1][0], -0.245136187f);
+		EXPECT_FLOAT_EQ(t_MatInv[1][1], 0.0544747082f);
+		EXPECT_FLOAT_EQ(t_MatInv[1][2], 0.128404669f);
+
+		EXPECT_FLOAT_EQ(t_MatInv[2][0], -0.0778210117f);
+		EXPECT_FLOAT_EQ(t_MatInv[2][1], 0.128404669f);
+		EXPECT_FLOAT_EQ(t_MatInv[2][2], -0.0544747082f);
+	}
 }
 
 int main(int argc, char* argv[])

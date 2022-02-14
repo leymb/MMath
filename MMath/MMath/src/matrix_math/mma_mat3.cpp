@@ -196,6 +196,27 @@ Mat3& Mat3::operator-=(float a_Subtrahend)
 	return *this;
 }
 
+bool Mat3::operator==(Mat3& a_Mat3)
+{
+	if (
+			m_NM_[0][0] == a_Mat3[0][0]
+		&&	m_NM_[0][1] == a_Mat3[0][1]
+		&&	m_NM_[0][2] == a_Mat3[0][2]
+
+		&&	m_NM_[1][0] == a_Mat3[1][0]
+		&&	m_NM_[1][1] == a_Mat3[1][1]
+		&&	m_NM_[1][2] == a_Mat3[1][2]
+
+		&&	m_NM_[2][0] == a_Mat3[2][0]
+		&&	m_NM_[2][1] == a_Mat3[2][1]
+		&&	m_NM_[2][2] == a_Mat3[2][2])
+	{
+		return true;
+	}
+
+	return false;
+}
+
 Mat3 Mat3::operator*(Mat3& a_Mat3)
 {
 	const float t_00 =	  m_NM_[0][0] * a_Mat3[0][0]
@@ -370,4 +391,29 @@ float Mat3::Det()
 			- m_NM_[0][0] * m_NM_[1][2] * m_NM_[2][1]
 			- m_NM_[0][1] * m_NM_[1][0] * m_NM_[2][2]
 			- m_NM_[0][2] * m_NM_[1][1] * m_NM_[2][0];
+}
+
+/// <summary>
+/// Calculates the Inverse of a given Matrix
+/// </summary>
+/// <returns>A Mat3 representing the Inverse of the initial Matrix</returns>
+Mat3 Mat3::Inv()
+{
+	Vec3D& t_VecA = (*this)[0];
+	Vec3D& t_VecB = (*this)[1];
+	Vec3D& t_VecC = (*this)[2];
+
+	// divide 1.0f by the scalar triple of this matrices columns 
+	float t_InverseDet = 1.0f / t_VecA.ScalarTriple(t_VecB, t_VecC);
+
+	Vec3D t_ColumnA = t_VecB.Cross(t_VecC);
+	Vec3D t_ColumnB = t_VecC.Cross(t_VecA);
+	Vec3D t_ColumnC = t_VecA.Cross(t_VecB);
+
+	return  Mat3{
+					t_ColumnA.m_X, t_ColumnA.m_Y, t_ColumnA.m_Z,
+					t_ColumnB.m_X, t_ColumnB.m_Y, t_ColumnB.m_Z,
+					t_ColumnC.m_X, t_ColumnC.m_Y, t_ColumnC.m_Z
+				}
+				* t_InverseDet;
 }
