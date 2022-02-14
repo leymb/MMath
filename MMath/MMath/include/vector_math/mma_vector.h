@@ -32,12 +32,12 @@ public:
 	float Magnitude();
 
 	// TODO: pass by reference where possible
-	float Dot(Vec3D a_Vec3D) const;
-	Vec3D Cross(Vec3D a_Vec3D) const;
-	float ScalarTriple(Vec3D a_VecB, Vec3D a_VecC) const;
+	float Dot(const Vec3D& a_Vec3D) const;
+	Vec3D Cross(const Vec3D& a_Vec3D) const;
+	float ScalarTriple(const Vec3D& a_VecB, const Vec3D& a_VecC) const;
 
 	void Normalize();
 
-	Vec3D ProjectOn(Vec3D a_VecB) const;
+	Vec3D ProjectOn(const Vec3D& a_VecB) const;
 	Vec3D Reject(const Vec3D& a_Vec3D) const;
 };

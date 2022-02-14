@@ -141,7 +141,7 @@ float Vec3D::Magnitude()
 	return sqrt(SquaredMagnitude());
 }
 
-float Vec3D::Dot(const Vec3D a_Vec3D) const
+float Vec3D::Dot(const Vec3D& a_Vec3D) const
 {
 	return
 			  this->m_X * a_Vec3D.m_X
@@ -149,7 +149,7 @@ float Vec3D::Dot(const Vec3D a_Vec3D) const
 			+ this->m_Z * a_Vec3D.m_Z;
 }
 
-Vec3D Vec3D::Cross(const Vec3D a_Vec3D) const
+Vec3D Vec3D::Cross(const Vec3D& a_Vec3D) const
 {
 	return{
 		this->m_Y * a_Vec3D.m_Z - this->m_Z * a_Vec3D.m_Y,
@@ -165,7 +165,7 @@ Vec3D Vec3D::Cross(const Vec3D a_Vec3D) const
 /// <param name="a_VecB">The second Vector</param>
 /// <param name="a_VecC">The third Vector</param>
 /// <returns></returns>
-float Vec3D::ScalarTriple(const Vec3D a_VecB, const Vec3D a_VecC) const
+float Vec3D::ScalarTriple(const Vec3D& a_VecB, const Vec3D& a_VecC) const
 {
 	return this->Dot(a_VecB.Cross(a_VecC));
 }
@@ -185,7 +185,7 @@ void Vec3D::Normalize()
 /// </summary>
 /// <param name="a_VecB"></param>
 /// <returns></returns>
-Vec3D Vec3D::ProjectOn(const Vec3D a_VecB) const
+Vec3D Vec3D::ProjectOn(const Vec3D& a_VecB) const
 {
 	return a_VecB * (this->Dot(a_VecB)/a_VecB.Dot(a_VecB));
 }
