@@ -103,7 +103,7 @@ TEST(Vector_Basic_Ops, Operators)
 		EXPECT_FLOAT_EQ(t_Vec3D[2], 6019.9400f);
 	}
 
-	// addition
+	// addition 
 	t_TestVector = {2.f, 10.2f, 4.f};
 	Vec3D t_Addend = 4.5f;
 
@@ -119,6 +119,29 @@ TEST(Vector_Basic_Ops, Operators)
 	EXPECT_FLOAT_EQ(t_Sum.m_Y, 10.2f + t_Addend.m_Y);
 	EXPECT_FLOAT_EQ(t_Sum.m_Z, 4.f + t_Addend.m_Z);
 
+	// addition (float)
+	{
+		Vec3D t_Temp = {3.f, 6.f, 6.f};
+		float t_Addend1 = 3.f;
+
+		Vec3D t_TestSum = t_Temp + t_Addend1;
+
+		EXPECT_FLOAT_EQ(t_TestSum.m_X, t_Temp.m_X + t_Addend1);
+		EXPECT_FLOAT_EQ(t_TestSum.m_Y, t_Temp.m_Y + t_Addend1);
+		EXPECT_FLOAT_EQ(t_TestSum.m_Z, t_Temp.m_Z + t_Addend1);
+	}
+
+	{
+		Vec3D t_Temp = {3.f, 6.f, 6.f};
+		float t_AddendF = 3.f;
+
+		t_Temp += t_AddendF;
+
+		EXPECT_FLOAT_EQ(t_Temp.m_X, 3.f + t_AddendF);
+		EXPECT_FLOAT_EQ(t_Temp.m_Y, 6.f + t_AddendF);
+		EXPECT_FLOAT_EQ(t_Temp.m_Z, 6.f + t_AddendF);
+	}
+
 	// subtraction
 	t_TestVector = {5.f, 2.f, 3.14159265358979f};
 	Vec3D t_Subtrahend = 2.35f;
@@ -133,6 +156,29 @@ TEST(Vector_Basic_Ops, Operators)
 	EXPECT_FLOAT_EQ(t_Difference.m_X, 5.f - t_Subtrahend.m_X);
 	EXPECT_FLOAT_EQ(t_Difference.m_Y, 2.f - t_Subtrahend.m_Y);
 	EXPECT_FLOAT_EQ(t_Difference.m_Z, 3.14159265358979f - t_Subtrahend.m_Z);
+
+	// subtraction (float)
+	{
+		Vec3D t_Temp = {15.f, 6.f, 3.5f};
+		float t_SubtrahendF = 5.0f;
+
+		Vec3D t_Diff = t_Temp - t_SubtrahendF;
+
+		EXPECT_FLOAT_EQ(t_Diff.m_X, t_Temp.m_X - t_SubtrahendF);
+		EXPECT_FLOAT_EQ(t_Diff.m_Y, t_Temp.m_Y - t_SubtrahendF);
+		EXPECT_FLOAT_EQ(t_Diff.m_Z, t_Temp.m_Z - t_SubtrahendF);
+	}
+
+	{
+		Vec3D t_Temp = {15.f, 6.f, 3.5f};
+		float t_SubtrahendF = 5.0f;
+
+		t_Temp -= t_SubtrahendF;
+
+		EXPECT_FLOAT_EQ(t_Temp.m_X, 15.f - t_SubtrahendF);
+		EXPECT_FLOAT_EQ(t_Temp.m_Y, 6.f - t_SubtrahendF);
+		EXPECT_FLOAT_EQ(t_Temp.m_Z, 3.5f - t_SubtrahendF);
+	}
 
 	// access
 	t_TestVector = {5.f, 2.f, 10.2f};

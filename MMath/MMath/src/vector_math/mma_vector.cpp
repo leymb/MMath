@@ -25,6 +25,11 @@ Vec3D Vec3D::operator+(const Vec3D& a_Vector) const
 			};
 }
 
+Vec3D Vec3D::operator+(float a_Addend) const
+{
+	return {m_X + a_Addend, m_Y + a_Addend, m_Z + a_Addend};
+}
+
 Vec3D Vec3D::operator-(const Vec3D& a_Vector) const
 {
 	return {
@@ -32,6 +37,11 @@ Vec3D Vec3D::operator-(const Vec3D& a_Vector) const
 			this->m_Y - a_Vector.m_Y,
 			this->m_Z - a_Vector.m_Z
 			};
+}
+
+Vec3D Vec3D::operator-(const float a_Subtrahend) const
+{
+	return {m_X - a_Subtrahend, m_Y - a_Subtrahend, m_Z - a_Subtrahend};
 }
 
 Vec3D Vec3D::operator*(const float a_Multiplier) const
@@ -78,11 +88,29 @@ Vec3D& Vec3D::operator+=(const Vec3D& a_Vector)
 	return *this;
 }
 
+Vec3D& Vec3D::operator+=(const float a_Addend)
+{
+	m_X += a_Addend;
+	m_Y += a_Addend;
+	m_Z += a_Addend;
+
+	return *this;
+}
+
 Vec3D& Vec3D::operator-=(const Vec3D& a_Vector)
 {
 	this->m_X -= a_Vector.m_X;
 	this->m_Y -= a_Vector.m_Y;
 	this->m_Z -= a_Vector.m_Z;
+
+	return *this;
+}
+
+Vec3D& Vec3D::operator-=(const float a_Subtrahend)
+{
+	m_X -= a_Subtrahend;
+	m_Y -= a_Subtrahend;
+	m_Z -= a_Subtrahend;
 
 	return *this;
 }
