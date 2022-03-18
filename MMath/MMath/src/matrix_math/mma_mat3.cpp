@@ -56,7 +56,6 @@ float& Mat3::operator()(const int n, const int m)
 	return (m_NM_[n][m]);
 }
 
-// TODO: Make this return a vector that references the values for easy access
 Vec3D& Mat3::operator[](const int i)
 {
 	return *reinterpret_cast<Vec3D *>(m_NM_[i]);
@@ -162,7 +161,7 @@ Mat3& Mat3::operator-=(Mat3& a_Mat3)
 	return *this;
 }
 
-Mat3& Mat3::operator+=(float a_Addend)
+Mat3& Mat3::operator+=(const float a_Addend)
 {
 	m_NM_[0][0] += a_Addend;
 	m_NM_[0][1] += a_Addend;
@@ -179,7 +178,7 @@ Mat3& Mat3::operator+=(float a_Addend)
 	return *this;
 }
 
-Mat3& Mat3::operator-=(float a_Subtrahend)
+Mat3& Mat3::operator-=(const float a_Subtrahend)
 {
 	m_NM_[0][0] -= a_Subtrahend;
 	m_NM_[0][1] -= a_Subtrahend;
@@ -196,7 +195,7 @@ Mat3& Mat3::operator-=(float a_Subtrahend)
 	return *this;
 }
 
-bool Mat3::operator==(Mat3& a_Mat3)
+bool Mat3::operator==(Mat3& a_Mat3) const
 {
 	if (
 			m_NM_[0][0] == a_Mat3[0][0]
@@ -217,7 +216,7 @@ bool Mat3::operator==(Mat3& a_Mat3)
 	return false;
 }
 
-Mat3 Mat3::operator*(Mat3& a_Mat3)
+Mat3 Mat3::operator*(Mat3& a_Mat3) const
 {
 	const float t_00 =	  m_NM_[0][0] * a_Mat3[0][0]
 						+ m_NM_[1][0] * a_Mat3[0][1]
@@ -256,7 +255,7 @@ Mat3 Mat3::operator*(Mat3& a_Mat3)
 			};
 }
 
-Mat3 Mat3::operator*(const float a_Multiplicand)
+Mat3 Mat3::operator*(const float a_Multiplicand) const
 {
 	float t_00 = m_NM_[0][0] * a_Multiplicand;
 	float t_01 = m_NM_[0][1] * a_Multiplicand;
@@ -277,7 +276,7 @@ Mat3 Mat3::operator*(const float a_Multiplicand)
 				};
 }
 
-Vec3D Mat3::operator*(Vec3D& a_Vec3D)
+Vec3D Mat3::operator*(const Vec3D& a_Vec3D) const
 {
 	float t_X =   m_NM_[0][0] * a_Vec3D.m_X
 				+ m_NM_[1][0] * a_Vec3D.m_Y
@@ -294,7 +293,7 @@ Vec3D Mat3::operator*(Vec3D& a_Vec3D)
 	return {t_X, t_Y, t_Z};
 }
 
-Mat3 Mat3::operator+(Mat3& a_Mat3)
+Mat3 Mat3::operator+(Mat3& a_Mat3) const
 {
 	float t_00 = m_NM_[0][0] + a_Mat3[0][0];
 	float t_10 = m_NM_[1][0] + a_Mat3[1][0];
@@ -315,7 +314,7 @@ Mat3 Mat3::operator+(Mat3& a_Mat3)
 			};
 }
 
-Mat3 Mat3::operator+(const float a_Addend)
+Mat3 Mat3::operator+(const float a_Addend) const
 {
 	
 	float t_00 = m_NM_[0][0] + a_Addend;
@@ -337,7 +336,7 @@ Mat3 Mat3::operator+(const float a_Addend)
 			};
 }
 
-Mat3 Mat3::operator-(Mat3& a_Mat3)
+Mat3 Mat3::operator-(Mat3& a_Mat3) const
 {
 	float t_00 = m_NM_[0][0] - a_Mat3[0][0];
 	float t_10 = m_NM_[1][0] - a_Mat3[1][0];
@@ -358,7 +357,7 @@ Mat3 Mat3::operator-(Mat3& a_Mat3)
 			};
 }
 
-Mat3 Mat3::operator-(float a_Subtrahend)
+Mat3 Mat3::operator-(const float a_Subtrahend) const
 {
 	float t_00 = m_NM_[0][0] - a_Subtrahend;
 	float t_10 = m_NM_[1][0] - a_Subtrahend;
@@ -383,7 +382,7 @@ Mat3 Mat3::operator-(float a_Subtrahend)
 /// Calculates the Determinant of a given Matrix.
 /// </summary>
 /// <returns>The Determinant of the Matrix</returns>
-float Mat3::Det()
+float Mat3::Det() const
 {
 	return	  m_NM_[0][0] * m_NM_[1][1] * m_NM_[2][2]
 			+ m_NM_[0][1] * m_NM_[1][2] * m_NM_[2][0]
@@ -399,16 +398,16 @@ float Mat3::Det()
 /// <returns>A Mat3 representing the Inverse of the initial Matrix</returns>
 Mat3 Mat3::Inv()
 {
-	Vec3D& t_VecA = (*this)[0];
-	Vec3D& t_VecB = (*this)[1];
-	Vec3D& t_VecC = (*this)[2];
+	const Vec3D& t_VecA = (*this)[0];
+	const Vec3D& t_VecB = (*this)[1];
+	const Vec3D& t_VecC = (*this)[2];
 
 	// divide 1.0f by the scalar triple of this matrices columns 
-	float t_InverseDet = 1.0f / t_VecA.ScalarTriple(t_VecB, t_VecC);
+	const float t_InverseDet = 1.0f / t_VecA.ScalarTriple(t_VecB, t_VecC);
 
-	Vec3D t_ColumnA = t_VecB.Cross(t_VecC);
-	Vec3D t_ColumnB = t_VecC.Cross(t_VecA);
-	Vec3D t_ColumnC = t_VecA.Cross(t_VecB);
+	const Vec3D t_ColumnA = t_VecB.Cross(t_VecC);
+	const Vec3D t_ColumnB = t_VecC.Cross(t_VecA);
+	const Vec3D t_ColumnC = t_VecA.Cross(t_VecB);
 
 	return  Mat3{
 					t_ColumnA.m_X, t_ColumnA.m_Y, t_ColumnA.m_Z,

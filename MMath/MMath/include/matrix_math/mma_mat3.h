@@ -31,17 +31,17 @@ public:
 	Mat3& operator+=(float a_Addend);
 	Mat3& operator-=(float a_Subtrahend);
 
-	bool operator==(Mat3& a_Mat3);
+	bool operator==(Mat3& a_Mat3) const;
 
-	Mat3 operator*(Mat3& a_Mat3);
-	Mat3 operator*(float a_Multiplicand);
-	Vec3D operator*(Vec3D& a_Vec3D);
-	Mat3 operator+(Mat3& a_Mat3);
-	Mat3 operator+(float a_Addend);
-	Mat3 operator-(Mat3& a_Mat3);
-	Mat3 operator-(float a_Subtrahend);
+	Mat3 operator*(Mat3& a_Mat3) const;
+	Mat3 operator*(float a_Multiplicand) const;
+	Vec3D operator*(const Vec3D& a_Vec3D) const;
+	Mat3 operator+(Mat3& a_Mat3) const;
+	Mat3 operator+(float a_Addend) const;
+	Mat3 operator-(Mat3& a_Mat3) const;
+	Mat3 operator-(float a_Subtrahend) const;
 
-	float Det();
+	float Det() const;
 	Mat3 Inv();
 
 
