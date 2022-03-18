@@ -37,14 +37,14 @@ public:
 	Mat4& operator+=(float a_Addend);
 	Mat4& operator-=(float a_Subtrahend);
 
-	bool operator==(Mat4& a_Mat4);
+	bool operator==(Mat4& a_Mat4) const;
 
 	Mat4 operator*(Mat4& a_Mat4);
 	Mat4 operator*(float a_Multiplicand);
 
 	//TODO add multiplication with Vec4D as soon as it is finished
 	//Vec4D operator*(Vec4D& a_Vec3D);
-	Mat4 operator+(Mat4& a_Mat4);
+	Mat4 operator+(Mat4& a_Mat4) const;
 	Mat4 operator+(float a_Addend);
 	Mat4 operator-(Mat4& a_Mat4);
 	Mat4 operator-(float a_Subtrahend);
