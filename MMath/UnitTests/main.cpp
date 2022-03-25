@@ -934,46 +934,7 @@ TEST(Matrix4D_Basic_Ops, Operators)
 		EXPECT_FLOAT_EQ(t_Test(3, 3), 1.0f);
 	}
 
-	// + operator
-	{
-		Mat4 t_MatA = {
-							4.0f, 1.3f, 6.0f, 8.0f,
-							6.7f, 4.0f, 6.6f, 10.f,
-							12.f, 2.4f, 3.0f, 6.6f,
-							0.0f, 0.0f, 0.0f, 1.0f
-						};
-
-		Mat4 t_MatB = {
-							2.0f, 1.4f, 7.8f, 5.5f,
-							4.7f, 5.6f, 6.3f, 3.2f,
-							8.0f, 2.4f, 2.8f, 4.0f,
-							1.0f, 5.6f, 2.6f, 1.5f
-						};
-
-		Mat4 t_Sum = t_MatA + t_MatB;
-
-		EXPECT_FLOAT_EQ(t_Sum(0, 0), t_MatA(0,0) + t_MatB(0,0));
-		EXPECT_FLOAT_EQ(t_Sum(0, 1), t_MatA(0,1) + t_MatB(0,1));
-		EXPECT_FLOAT_EQ(t_Sum(0, 2), t_MatA(0,2) + t_MatB(0,2));
-		EXPECT_FLOAT_EQ(t_Sum(0, 3), t_MatA(0,3) + t_MatB(0,3));
-
-		EXPECT_FLOAT_EQ(t_Sum(1, 0), t_MatA(1,0) + t_MatB(1,0));
-		EXPECT_FLOAT_EQ(t_Sum(1, 1), t_MatA(1,1) + t_MatB(1,1));
-		EXPECT_FLOAT_EQ(t_Sum(1, 2), t_MatA(1,2) + t_MatB(1,2));
-		EXPECT_FLOAT_EQ(t_Sum(1, 3), t_MatA(1,3) + t_MatB(1,3));
-
-		EXPECT_FLOAT_EQ(t_Sum(2, 0), t_MatA(2,0) + t_MatB(2,0));
-		EXPECT_FLOAT_EQ(t_Sum(2, 1), t_MatA(2,1) + t_MatB(2,1));
-		EXPECT_FLOAT_EQ(t_Sum(2, 2), t_MatA(2,2) + t_MatB(2,2));
-		EXPECT_FLOAT_EQ(t_Sum(2, 3), t_MatA(2,3) + t_MatB(2,3));
-
-		EXPECT_FLOAT_EQ(t_Sum(3, 0), t_MatA(3,0) + t_MatB(3,0));
-		EXPECT_FLOAT_EQ(t_Sum(3, 1), t_MatA(3,1) + t_MatB(3,1));
-		EXPECT_FLOAT_EQ(t_Sum(3, 2), t_MatA(3,2) + t_MatB(3,2));
-		EXPECT_FLOAT_EQ(t_Sum(3, 3), t_MatA(3,3) + t_MatB(3,3));
-	}
-
-	// + operator (float)
+	// += operator (float)
 	{
 		Mat4 t_MatA = {
 							4.0f, 1.3f, 6.0f, 8.0f,
@@ -1262,7 +1223,7 @@ TEST(Matrix4D_Basic_Ops, Operators)
 	}
 
 	// * operator (Mat4)
-	/*{
+	{
 		Mat4 t_MatA = {
 							4.0f, 1.3f, 6.0f, 8.0f,
 							6.7f, 4.0f, 6.6f, 10.f,
@@ -1298,7 +1259,187 @@ TEST(Matrix4D_Basic_Ops, Operators)
 		EXPECT_FLOAT_EQ(t_Product(3, 1), t_MatA(3,1) * t_MatB(3,1));
 		EXPECT_FLOAT_EQ(t_Product(3, 2), t_MatA(3,2) * t_MatB(3,2));
 		EXPECT_FLOAT_EQ(t_Product(3, 3), t_MatA(3,3) * t_MatB(3,3));
-	}*/
+	}
+
+	// * operator (float)
+	{
+		Mat4 t_MatA = {
+							4.0f, 1.3f, 6.0f, 8.0f,
+							6.7f, 4.0f, 6.6f, 10.f,
+							12.f, 2.4f, 3.0f, 6.6f,
+							0.0f, 0.0f, 0.0f, 1.0f
+						};
+
+		float t_Multiplicand = 10.786f;
+
+		Mat4 t_Product = t_MatA * t_Multiplicand;
+
+		EXPECT_FLOAT_EQ(t_Product(0, 0), t_MatA(0,0) * t_Multiplicand);
+		EXPECT_FLOAT_EQ(t_Product(0, 1), t_MatA(0,1) * t_Multiplicand);
+		EXPECT_FLOAT_EQ(t_Product(0, 2), t_MatA(0,2) * t_Multiplicand);
+		EXPECT_FLOAT_EQ(t_Product(0, 3), t_MatA(0,3) * t_Multiplicand);
+
+		EXPECT_FLOAT_EQ(t_Product(1, 0), t_MatA(1,0) * t_Multiplicand);
+		EXPECT_FLOAT_EQ(t_Product(1, 1), t_MatA(1,1) * t_Multiplicand);
+		EXPECT_FLOAT_EQ(t_Product(1, 2), t_MatA(1,2) * t_Multiplicand);
+		EXPECT_FLOAT_EQ(t_Product(1, 3), t_MatA(1,3) * t_Multiplicand);
+
+		EXPECT_FLOAT_EQ(t_Product(2, 0), t_MatA(2,0) * t_Multiplicand);
+		EXPECT_FLOAT_EQ(t_Product(2, 1), t_MatA(2,1) * t_Multiplicand);
+		EXPECT_FLOAT_EQ(t_Product(2, 2), t_MatA(2,2) * t_Multiplicand);
+		EXPECT_FLOAT_EQ(t_Product(2, 3), t_MatA(2,3) * t_Multiplicand);
+
+		EXPECT_FLOAT_EQ(t_Product(3, 0), t_MatA(3,0) * t_Multiplicand);
+		EXPECT_FLOAT_EQ(t_Product(3, 1), t_MatA(3,1) * t_Multiplicand);
+		EXPECT_FLOAT_EQ(t_Product(3, 2), t_MatA(3,2) * t_Multiplicand);
+		EXPECT_FLOAT_EQ(t_Product(3, 3), t_MatA(3,3) * t_Multiplicand);
+	}
+
+	// + operator (Mat4)
+	{
+		Mat4 t_MatA = {
+							4.0f, 1.3f, 6.0f, 8.0f,
+							6.7f, 4.0f, 6.6f, 10.f,
+							12.f, 2.4f, 3.0f, 6.6f,
+							0.0f, 0.0f, 0.0f, 1.0f
+						};
+
+		Mat4 t_MatB = {
+							2.0f, 1.4f, 7.8f, 5.5f,
+							4.7f, 5.6f, 6.3f, 3.2f,
+							8.0f, 2.4f, 2.8f, 4.0f,
+							1.0f, 5.6f, 2.6f, 1.5f
+						};
+
+		Mat4 t_Sum = t_MatA + t_MatB;
+
+		EXPECT_FLOAT_EQ(t_Sum(0, 0), t_MatA(0,0) + t_MatB(0,0));
+		EXPECT_FLOAT_EQ(t_Sum(0, 1), t_MatA(0,1) + t_MatB(0,1));
+		EXPECT_FLOAT_EQ(t_Sum(0, 2), t_MatA(0,2) + t_MatB(0,2));
+		EXPECT_FLOAT_EQ(t_Sum(0, 3), t_MatA(0,3) + t_MatB(0,3));
+
+		EXPECT_FLOAT_EQ(t_Sum(1, 0), t_MatA(1,0) + t_MatB(1,0));
+		EXPECT_FLOAT_EQ(t_Sum(1, 1), t_MatA(1,1) + t_MatB(1,1));
+		EXPECT_FLOAT_EQ(t_Sum(1, 2), t_MatA(1,2) + t_MatB(1,2));
+		EXPECT_FLOAT_EQ(t_Sum(1, 3), t_MatA(1,3) + t_MatB(1,3));
+
+		EXPECT_FLOAT_EQ(t_Sum(2, 0), t_MatA(2,0) + t_MatB(2,0));
+		EXPECT_FLOAT_EQ(t_Sum(2, 1), t_MatA(2,1) + t_MatB(2,1));
+		EXPECT_FLOAT_EQ(t_Sum(2, 2), t_MatA(2,2) + t_MatB(2,2));
+		EXPECT_FLOAT_EQ(t_Sum(2, 3), t_MatA(2,3) + t_MatB(2,3));
+
+		EXPECT_FLOAT_EQ(t_Sum(3, 0), t_MatA(3,0) + t_MatB(3,0));
+		EXPECT_FLOAT_EQ(t_Sum(3, 1), t_MatA(3,1) + t_MatB(3,1));
+		EXPECT_FLOAT_EQ(t_Sum(3, 2), t_MatA(3,2) + t_MatB(3,2));
+		EXPECT_FLOAT_EQ(t_Sum(3, 3), t_MatA(3,3) + t_MatB(3,3));
+	}
+
+	// + operator (float)
+	{
+		Mat4 t_MatA = {
+							4.0f, 1.3f, 6.0f, 8.0f,
+							6.7f, 4.0f, 6.6f, 10.f,
+							12.f, 2.4f, 3.0f, 6.6f,
+							0.0f, 0.0f, 0.0f, 1.0f
+						};
+
+		float t_Addend = 3.786f;
+
+		Mat4 t_Product = t_MatA + t_Addend;
+
+		EXPECT_FLOAT_EQ(t_Product(0, 0), t_MatA(0,0) + t_Addend);
+		EXPECT_FLOAT_EQ(t_Product(0, 1), t_MatA(0,1) + t_Addend);
+		EXPECT_FLOAT_EQ(t_Product(0, 2), t_MatA(0,2) + t_Addend);
+		EXPECT_FLOAT_EQ(t_Product(0, 3), t_MatA(0,3) + t_Addend);
+
+		EXPECT_FLOAT_EQ(t_Product(1, 0), t_MatA(1,0) + t_Addend);
+		EXPECT_FLOAT_EQ(t_Product(1, 1), t_MatA(1,1) + t_Addend);
+		EXPECT_FLOAT_EQ(t_Product(1, 2), t_MatA(1,2) + t_Addend);
+		EXPECT_FLOAT_EQ(t_Product(1, 3), t_MatA(1,3) + t_Addend);
+
+		EXPECT_FLOAT_EQ(t_Product(2, 0), t_MatA(2,0) + t_Addend);
+		EXPECT_FLOAT_EQ(t_Product(2, 1), t_MatA(2,1) + t_Addend);
+		EXPECT_FLOAT_EQ(t_Product(2, 2), t_MatA(2,2) + t_Addend);
+		EXPECT_FLOAT_EQ(t_Product(2, 3), t_MatA(2,3) + t_Addend);
+
+		EXPECT_FLOAT_EQ(t_Product(3, 0), t_MatA(3,0) + t_Addend);
+		EXPECT_FLOAT_EQ(t_Product(3, 1), t_MatA(3,1) + t_Addend);
+		EXPECT_FLOAT_EQ(t_Product(3, 2), t_MatA(3,2) + t_Addend);
+		EXPECT_FLOAT_EQ(t_Product(3, 3), t_MatA(3,3) + t_Addend);
+	}
+
+	// - operator (Mat4)
+	{
+		Mat4 t_MatA = {
+							4.0f, 1.3f, 6.0f, 8.0f,
+							6.7f, 4.0f, 6.6f, 10.f,
+							12.f, 2.4f, 3.0f, 6.6f,
+							0.0f, 0.0f, 0.0f, 1.0f
+						};
+
+		Mat4 t_MatB = {
+							2.0f, 1.4f, 7.8f, 5.5f,
+							4.7f, 5.6f, 6.3f, 3.2f,
+							8.0f, 2.4f, 2.8f, 4.0f,
+							1.0f, 5.6f, 2.6f, 1.5f
+						};
+
+		Mat4 t_Difference = t_MatA - t_MatB;
+
+		EXPECT_FLOAT_EQ(t_Difference(0, 0), t_MatA(0,0) - t_MatB(0,0));
+		EXPECT_FLOAT_EQ(t_Difference(0, 1), t_MatA(0,1) - t_MatB(0,1));
+		EXPECT_FLOAT_EQ(t_Difference(0, 2), t_MatA(0,2) - t_MatB(0,2));
+		EXPECT_FLOAT_EQ(t_Difference(0, 3), t_MatA(0,3) - t_MatB(0,3));
+
+		EXPECT_FLOAT_EQ(t_Difference(1, 0), t_MatA(1,0) - t_MatB(1,0));
+		EXPECT_FLOAT_EQ(t_Difference(1, 1), t_MatA(1,1) - t_MatB(1,1));
+		EXPECT_FLOAT_EQ(t_Difference(1, 2), t_MatA(1,2) - t_MatB(1,2));
+		EXPECT_FLOAT_EQ(t_Difference(1, 3), t_MatA(1,3) - t_MatB(1,3));
+
+		EXPECT_FLOAT_EQ(t_Difference(2, 0), t_MatA(2,0) - t_MatB(2,0));
+		EXPECT_FLOAT_EQ(t_Difference(2, 1), t_MatA(2,1) - t_MatB(2,1));
+		EXPECT_FLOAT_EQ(t_Difference(2, 2), t_MatA(2,2) - t_MatB(2,2));
+		EXPECT_FLOAT_EQ(t_Difference(2, 3), t_MatA(2,3) - t_MatB(2,3));
+
+		EXPECT_FLOAT_EQ(t_Difference(3, 0), t_MatA(3,0) - t_MatB(3,0));
+		EXPECT_FLOAT_EQ(t_Difference(3, 1), t_MatA(3,1) - t_MatB(3,1));
+		EXPECT_FLOAT_EQ(t_Difference(3, 2), t_MatA(3,2) - t_MatB(3,2));
+		EXPECT_FLOAT_EQ(t_Difference(3, 3), t_MatA(3,3) - t_MatB(3,3));
+	}
+
+	// - operator (float)
+	{
+		Mat4 t_MatA = {
+							4.0f, 1.3f, 6.0f, 8.0f,
+							6.7f, 4.0f, 6.6f, 10.f,
+							12.f, 2.4f, 3.0f, 6.6f,
+							0.0f, 0.0f, 0.0f, 1.0f
+						};
+
+		float t_Subtrahend = 0.457849f;
+
+		Mat4 t_Difference = t_MatA - t_Subtrahend;
+
+		EXPECT_FLOAT_EQ(t_Difference(0, 0), t_MatA(0,0) - t_Subtrahend);
+		EXPECT_FLOAT_EQ(t_Difference(0, 1), t_MatA(0,1) - t_Subtrahend);
+		EXPECT_FLOAT_EQ(t_Difference(0, 2), t_MatA(0,2) - t_Subtrahend);
+		EXPECT_FLOAT_EQ(t_Difference(0, 3), t_MatA(0,3) - t_Subtrahend);
+
+		EXPECT_FLOAT_EQ(t_Difference(1, 0), t_MatA(1,0) - t_Subtrahend);
+		EXPECT_FLOAT_EQ(t_Difference(1, 1), t_MatA(1,1) - t_Subtrahend);
+		EXPECT_FLOAT_EQ(t_Difference(1, 2), t_MatA(1,2) - t_Subtrahend);
+		EXPECT_FLOAT_EQ(t_Difference(1, 3), t_MatA(1,3) - t_Subtrahend);
+
+		EXPECT_FLOAT_EQ(t_Difference(2, 0), t_MatA(2,0) - t_Subtrahend);
+		EXPECT_FLOAT_EQ(t_Difference(2, 1), t_MatA(2,1) - t_Subtrahend);
+		EXPECT_FLOAT_EQ(t_Difference(2, 2), t_MatA(2,2) - t_Subtrahend);
+		EXPECT_FLOAT_EQ(t_Difference(2, 3), t_MatA(2,3) - t_Subtrahend);
+
+		EXPECT_FLOAT_EQ(t_Difference(3, 0), t_MatA(3,0) - t_Subtrahend);
+		EXPECT_FLOAT_EQ(t_Difference(3, 1), t_MatA(3,1) - t_Subtrahend);
+		EXPECT_FLOAT_EQ(t_Difference(3, 2), t_MatA(3,2) - t_Subtrahend);
+		EXPECT_FLOAT_EQ(t_Difference(3, 3), t_MatA(3,3) - t_Subtrahend);
+	}
 }
 
 int main(int argc, char* argv[])

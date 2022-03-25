@@ -71,7 +71,7 @@ Mat4& Mat4::operator*=(Mat4& a_Mat4)
 	return *this;
 }
 
-Mat4& Mat4::operator*=(const float a_Multiplicand)
+Mat4& Mat4::operator*=(float a_Multiplicand)
 {
 	// todo replace with vec4& as soon as its implemented
 	Vec3D& t_Column0 = reinterpret_cast<Vec3D&>(m_NM_[0]);
@@ -220,6 +220,66 @@ bool Mat4::operator==(Mat4& a_Mat4) const
 	return false;
 }
 
+Mat4 Mat4::operator*(Mat4& a_Mat4) const
+{
+	float t_00 = m_NM_[0][0] * a_Mat4(0,0);
+	float t_01 = m_NM_[0][1] * a_Mat4(0, 1);
+	float t_02 = m_NM_[0][2] * a_Mat4(0, 2);
+	float t_03 = m_NM_[0][3] * a_Mat4(0, 3);
+
+	float t_10 = m_NM_[1][0] * a_Mat4(1, 0);
+	float t_11 = m_NM_[1][1] * a_Mat4(1, 1);
+	float t_12 = m_NM_[1][2] * a_Mat4(1, 2);
+	float t_13 = m_NM_[1][3] * a_Mat4(1, 3);
+
+	float t_20 = m_NM_[2][0] * a_Mat4(2, 0);
+	float t_21 = m_NM_[2][1] * a_Mat4(2, 1);
+	float t_22 = m_NM_[2][2] * a_Mat4(2, 2);
+	float t_23 = m_NM_[2][3] * a_Mat4(2, 3);
+
+	float t_30 = m_NM_[3][0] * a_Mat4(3, 0);
+	float t_31 = m_NM_[3][1] * a_Mat4(3, 1);
+	float t_32 = m_NM_[3][2] * a_Mat4(3, 2);
+	float t_33 = m_NM_[3][3] * a_Mat4(3, 3);
+
+	return {
+				t_00, t_10, t_20, t_30,
+				t_01, t_11, t_21, t_31,
+				t_02, t_12, t_22, t_32,
+				t_03, t_13, t_23, t_33
+			};
+}
+
+Mat4 Mat4::operator*(const float a_Multiplicand) const
+{
+	float t_00 = m_NM_[0][0] * a_Multiplicand;
+	float t_01 = m_NM_[0][1] * a_Multiplicand;
+	float t_02 = m_NM_[0][2] * a_Multiplicand;
+	float t_03 = m_NM_[0][3] * a_Multiplicand;
+
+	float t_10 = m_NM_[1][0] * a_Multiplicand;
+	float t_11 = m_NM_[1][1] * a_Multiplicand;
+	float t_12 = m_NM_[1][2] * a_Multiplicand;
+	float t_13 = m_NM_[1][3] * a_Multiplicand;
+
+	float t_20 = m_NM_[2][0] * a_Multiplicand;
+	float t_21 = m_NM_[2][1] * a_Multiplicand;
+	float t_22 = m_NM_[2][2] * a_Multiplicand;
+	float t_23 = m_NM_[2][3] * a_Multiplicand;
+
+	float t_30 = m_NM_[3][0] * a_Multiplicand;
+	float t_31 = m_NM_[3][1] * a_Multiplicand;
+	float t_32 = m_NM_[3][2] * a_Multiplicand;
+	float t_33 = m_NM_[3][3] * a_Multiplicand;
+
+	return {
+				t_00, t_10, t_20, t_30,
+				t_01, t_11, t_21, t_31,
+				t_02, t_12, t_22, t_32,
+				t_03, t_13, t_23, t_33
+			};
+}
+
 Mat4 Mat4::operator+(Mat4& a_Mat4) const
 {
 	float t_00 = m_NM_[0][0] + a_Mat4(0,0);
@@ -241,6 +301,96 @@ Mat4 Mat4::operator+(Mat4& a_Mat4) const
 	float t_31 = m_NM_[3][1] + a_Mat4(3, 1);
 	float t_32 = m_NM_[3][2] + a_Mat4(3, 2);
 	float t_33 = m_NM_[3][3] + a_Mat4(3, 3);
+
+	return {
+				t_00, t_10, t_20, t_30,
+				t_01, t_11, t_21, t_31,
+				t_02, t_12, t_22, t_32,
+				t_03, t_13, t_23, t_33
+			};
+}
+
+Mat4 Mat4::operator+(const float a_Addend) const
+{
+	float t_00 = m_NM_[0][0] + a_Addend;
+	float t_01 = m_NM_[0][1] + a_Addend;
+	float t_02 = m_NM_[0][2] + a_Addend;
+	float t_03 = m_NM_[0][3] + a_Addend;
+
+	float t_10 = m_NM_[1][0] + a_Addend;
+	float t_11 = m_NM_[1][1] + a_Addend;
+	float t_12 = m_NM_[1][2] + a_Addend;
+	float t_13 = m_NM_[1][3] + a_Addend;
+
+	float t_20 = m_NM_[2][0] + a_Addend;
+	float t_21 = m_NM_[2][1] + a_Addend;
+	float t_22 = m_NM_[2][2] + a_Addend;
+	float t_23 = m_NM_[2][3] + a_Addend;
+
+	float t_30 = m_NM_[3][0] + a_Addend;
+	float t_31 = m_NM_[3][1] + a_Addend;
+	float t_32 = m_NM_[3][2] + a_Addend;
+	float t_33 = m_NM_[3][3] + a_Addend;
+
+	return {
+				t_00, t_10, t_20, t_30,
+				t_01, t_11, t_21, t_31,
+				t_02, t_12, t_22, t_32,
+				t_03, t_13, t_23, t_33
+			};
+}
+
+Mat4 Mat4::operator-(Mat4& a_Mat4) const
+{
+	float t_00 = m_NM_[0][0] - a_Mat4(0,0);
+	float t_01 = m_NM_[0][1] - a_Mat4(0, 1);
+	float t_02 = m_NM_[0][2] - a_Mat4(0, 2);
+	float t_03 = m_NM_[0][3] - a_Mat4(0, 3);
+
+	float t_10 = m_NM_[1][0] - a_Mat4(1, 0);
+	float t_11 = m_NM_[1][1] - a_Mat4(1, 1);
+	float t_12 = m_NM_[1][2] - a_Mat4(1, 2);
+	float t_13 = m_NM_[1][3] - a_Mat4(1, 3);
+
+	float t_20 = m_NM_[2][0] - a_Mat4(2, 0);
+	float t_21 = m_NM_[2][1] - a_Mat4(2, 1);
+	float t_22 = m_NM_[2][2] - a_Mat4(2, 2);
+	float t_23 = m_NM_[2][3] - a_Mat4(2, 3);
+
+	float t_30 = m_NM_[3][0] - a_Mat4(3, 0);
+	float t_31 = m_NM_[3][1] - a_Mat4(3, 1);
+	float t_32 = m_NM_[3][2] - a_Mat4(3, 2);
+	float t_33 = m_NM_[3][3] - a_Mat4(3, 3);
+
+	return {
+				t_00, t_10, t_20, t_30,
+				t_01, t_11, t_21, t_31,
+				t_02, t_12, t_22, t_32,
+				t_03, t_13, t_23, t_33
+			};
+}
+
+Mat4 Mat4::operator-(const float a_Subtrahend) const
+{
+	float t_00 = m_NM_[0][0] - a_Subtrahend;
+	float t_01 = m_NM_[0][1] - a_Subtrahend;
+	float t_02 = m_NM_[0][2] - a_Subtrahend;
+	float t_03 = m_NM_[0][3] - a_Subtrahend;
+
+	float t_10 = m_NM_[1][0] - a_Subtrahend;
+	float t_11 = m_NM_[1][1] - a_Subtrahend;
+	float t_12 = m_NM_[1][2] - a_Subtrahend;
+	float t_13 = m_NM_[1][3] - a_Subtrahend;
+
+	float t_20 = m_NM_[2][0] - a_Subtrahend;
+	float t_21 = m_NM_[2][1] - a_Subtrahend;
+	float t_22 = m_NM_[2][2] - a_Subtrahend;
+	float t_23 = m_NM_[2][3] - a_Subtrahend;
+
+	float t_30 = m_NM_[3][0] - a_Subtrahend;
+	float t_31 = m_NM_[3][1] - a_Subtrahend;
+	float t_32 = m_NM_[3][2] - a_Subtrahend;
+	float t_33 = m_NM_[3][3] - a_Subtrahend;
 
 	return {
 				t_00, t_10, t_20, t_30,
