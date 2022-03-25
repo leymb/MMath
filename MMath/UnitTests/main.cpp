@@ -1442,6 +1442,21 @@ TEST(Matrix4D_Basic_Ops, Operators)
 	}
 }
 
+TEST(Matrix4D_Basic_Ops, Basic_Calculations)
+{
+	// Determinant
+	{
+		Mat4 t_MatA = {
+							4.0f, 1.3f, 6.0f, 8.0f,
+							6.7f, 4.0f, 6.6f, 10.f,
+							12.f, 2.4f, 3.0f, 6.6f,
+							0.0f, 0.0f, 0.0f, 1.0f
+						};
+
+		EXPECT_FLOAT_EQ(t_MatA.Det(), -130.05f);
+	}
+}
+
 int main(int argc, char* argv[])
 {
 	testing::InitGoogleTest();

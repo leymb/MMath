@@ -49,7 +49,7 @@ public:
 	Mat4 operator-(Mat4& a_Mat4) const;
 	Mat4 operator-(float a_Subtrahend) const;
 
-	float Det();
+	float Det() const;
 	Mat4 Inv();
 
 private:
