@@ -1,10 +1,11 @@
+
 #include "pch.h"
 #include "matrix_math/mma_mat4.h"
 
-// || M00 | M10 | M20 | M30||
-// || M01 | M11 | M21 | M31||
-// || M02 | M12 | M22 | M32||
-// || M03 | M13 | M23 | M33||
+// 	|| M00 | M10 | M20 | M30||
+// 	|| M01 | M11 | M21 | M31||
+// 	|| M02 | M12 | M22 | M32||
+// 	|| M03 | M13 | M23 | M33||.
 
 Mat4::Mat4(const float a_Diagonal)
 {
@@ -400,6 +401,9 @@ Mat4 Mat4::operator-(const float a_Subtrahend) const
 			};
 }
 
+/// <summary>	Calculates the determinant of a given matrix. </summary>
+/// <returns>	The Determinant. </returns>
+
 float Mat4::Det() const
 {
 	return		m_NM_[0][0] * m_NM_[1][1] * m_NM_[2][2] * m_NM_[3][3]
@@ -427,5 +431,13 @@ float Mat4::Det() const
 			+	m_NM_[0][2] * m_NM_[1][1] * m_NM_[2][3] * m_NM_[3][0]
 			+	m_NM_[0][1] * m_NM_[1][3] * m_NM_[2][2] * m_NM_[3][0]
 			;
+}
+
+/// <summary>	Gets the inverse. </summary>
+/// <returns>	The Inverse of the matrix. </returns>
+
+Mat4 Mat4::Inv()
+{
+
 }
 

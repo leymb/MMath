@@ -1,3 +1,4 @@
+
 #include "pch.h"
 #include "vector_math/mma_vector.h"
 #include "matrix_math/mma_mat3.h"
@@ -187,44 +188,47 @@ Vec3D Vec3D::Cross(const Vec3D& a_Vec3D) const
 }
 
 /// <summary>
-/// Calculates the scalar triple product in the form of
-///	[this, VecB, VecC] = this.Dot(VecB.Cross(VecC))
+/// 	Calculates the scalar triple product in the form of [this, VecB, VecC] =
+/// 	this.Dot(VecB.Cross(VecC))
 /// </summary>
-/// <param name="a_VecB">The second Vector</param>
-/// <param name="a_VecC">The third Vector</param>
-/// <returns></returns>
+/// <param name="a_VecB">	The second Vector. </param>
+/// <param name="a_VecC">	The third Vector. </param>
+/// <returns>	The scalar triple product. </returns>
+
 float Vec3D::ScalarTriple(const Vec3D& a_VecB, const Vec3D& a_VecC) const
 {
 	return this->Dot(a_VecB.Cross(a_VecC));
 }
 
 /// <summary>
-/// Normalizes the vector, resulting in a unit vector
-///	that has a magnitude = 1.0f.
+/// 	Normalizes the vector, resulting in a unit vector that has a magnitude = 1.0f.
 /// </summary>
+
 void Vec3D::Normalize()
 {
 	const float t_Divisor = 1.f/Magnitude();
 	*this *= t_Divisor;
 }
 
-/// <summary>
-/// Projects this vector on the parameter VecB.
-/// </summary>
-/// <param name="a_VecB"></param>
-/// <returns></returns>
+/// <summary>	Projects this vector on the parameter VecB. </summary>
+/// <param name="a_VecB">	. </param>
+/// <returns>	A Vec3D. </returns>
+
 Vec3D Vec3D::ProjectOn(const Vec3D& a_VecB) const
 {
 	return a_VecB * (this->Dot(a_VecB)/a_VecB.Dot(a_VecB));
 }
 
 /// <summary>
-/// Rejects this vector from the vector specified in the parameters by
-///	subtracting the projection from the original vector. 
+/// 	Rejects this vector from the vector specified in the parameters by subtracting the
+/// 	projection from the original vector.
 /// </summary>
-/// <param name="a_VecB">Vector to form </param>
-/// <returns>A Vec3D that represents the rejection (perpendicular part) 
-/// of this vector from VecB</returns>
+/// <param name="a_VecB">	Vector to form. </param>
+/// <returns>
+/// 	A Vec3D that represents the rejection (perpendicular part)
+/// 	of this vector from VecB.
+/// </returns>
+
 Vec3D Vec3D::Reject(const Vec3D& a_VecB) const
 {
 	return *this - ProjectOn(a_VecB);

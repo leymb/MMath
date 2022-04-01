@@ -1,10 +1,13 @@
+
 #include "pch.h"
 #include "matrix_math/mma_mat3.h"
 #include "vector_math/mma_vector.h"
 
-// || M00 | M10 | M20 ||
-// || M01 | M11 | M21 ||
-// || M02 | M12 | M22 ||
+
+// 	|| M00 | M10 | M20 ||
+// 	|| M01 | M11 | M21 ||
+// 	|| M02 | M12 | M22 ||.
+
 
 Mat3::Mat3(const float a_Diagonal)
 {
@@ -13,12 +16,11 @@ Mat3::Mat3(const float a_Diagonal)
 	m_NM_[2][2] = a_Diagonal;
 }
 
-/// <summary>
-/// Creates a new Matrix from three Vec3Ds.
-/// </summary>
-/// <param name="a_VecA">Vec3D making up the first column of the Mat3</param>
-/// <param name="a_VecB">Vec3D making up the second column of the Mat3</param>
-/// <param name="a_VecC">Vec3D making up the third column of the Mat3</param>
+/// <summary>	Creates a new Matrix from three Vec3Ds. </summary>
+/// <param name="a_VecA">	Vec3D making up the first column of the Mat3. </param>
+/// <param name="a_VecB">	Vec3D making up the second column of the Mat3. </param>
+/// <param name="a_VecC">	Vec3D making up the third column of the Mat3. </param>
+
 Mat3::Mat3(const Vec3D& a_VecA, const Vec3D& a_VecB, const Vec3D& a_VecC)
 {
 	m_NM_[0][0] = a_VecA.m_X;
@@ -378,10 +380,9 @@ Mat3 Mat3::operator-(const float a_Subtrahend) const
 			};
 }
 
-/// <summary>
-/// Calculates the Determinant of a given Matrix.
-/// </summary>
-/// <returns>The Determinant of the Matrix</returns>
+/// <summary>	Calculates the Determinant of a given Matrix. </summary>
+/// <returns>	The Determinant of the Matrix. </returns>
+
 float Mat3::Det() const
 {
 	return	  m_NM_[0][0] * m_NM_[1][1] * m_NM_[2][2]
@@ -392,10 +393,9 @@ float Mat3::Det() const
 			- m_NM_[0][2] * m_NM_[1][1] * m_NM_[2][0];
 }
 
-/// <summary>
-/// Calculates the Inverse of a given Matrix
-/// </summary>
-/// <returns>A Mat3 representing the Inverse of the initial Matrix</returns>
+/// <summary>	Calculates the Inverse of a given Matrix. </summary>
+/// <returns>	A Mat3 representing the Inverse of the initial Matrix. </returns>
+
 Mat3 Mat3::Inv()
 {
 	const Vec3D& t_VecA = (*this)[0];
