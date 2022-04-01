@@ -433,11 +433,4 @@ float Mat4::Det() const
 			;
 }
 
-/// <summary>	Gets the inverse. </summary>
-/// <returns>	The Inverse of the matrix. </returns>
-
-Mat4 Mat4::Inv()
-{
-
-}
 
