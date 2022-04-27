@@ -32,6 +32,74 @@ Vec4D Vec4D::operator+(const Vec4D& a_Vector) const
 				m_W + a_Vector.m_W};
 }
 
+Vec4D Vec4D::operator+=(const Vec4D& a_Vector)
+{
+	m_X += a_Vector.m_X;
+	m_Y += a_Vector.m_Y;
+	m_Z += a_Vector.m_Z;
+	m_W += a_Vector.m_W;
+
+	return *this;
+}
+
+Vec4D Vec4D::operator+(const float a_Addend) const
+{
+	return {
+				m_X + a_Addend,
+				m_Y + a_Addend,
+				m_Z + a_Addend,
+				m_W + a_Addend
+	};
+}
+
+Vec4D Vec4D::operator+=(const float a_Addend)
+{
+	m_X += a_Addend;
+	m_Y += a_Addend;
+	m_Z += a_Addend;
+	m_W += a_Addend;
+
+	return *this;
+}
+
+Vec4D Vec4D::operator-(const Vec4D& a_Vector) const
+{
+	return {	m_X - a_Vector.m_X,
+				m_Y - a_Vector.m_Y,
+				m_Z - a_Vector.m_Z,
+				m_W - a_Vector.m_W};
+}
+
+Vec4D Vec4D::operator-=(const Vec4D& a_Vector)
+{
+	m_X -= a_Vector.m_X;
+	m_Y -= a_Vector.m_Y;
+	m_Z -= a_Vector.m_Z;
+	m_W -= a_Vector.m_W;
+
+	return *this;
+}
+
+Vec4D Vec4D::operator-(const float a_Subtrahend) const
+{
+	return {
+				m_X - a_Subtrahend,
+				m_Y - a_Subtrahend,
+				m_Z - a_Subtrahend,
+				m_W - a_Subtrahend
+	};
+}
+
+Vec4D Vec4D::operator-=(const float a_Subtrahend)
+{
+	m_X -= a_Subtrahend;
+	m_Y -= a_Subtrahend;
+	m_Z -= a_Subtrahend;
+	m_W -= a_Subtrahend;
+
+	return *this;
+}
+
 Vec4D Vec4D::operator*(const float a_Multiplier)
 {
 	return {	m_X * a_Multiplier,

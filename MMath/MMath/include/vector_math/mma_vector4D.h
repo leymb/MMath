@@ -13,6 +13,14 @@ public:
 	float m_W;
 
 	Vec4D operator+(const Vec4D& a_Vector) const;
+	Vec4D operator+=(const Vec4D& a_Vector);
+	Vec4D operator+(const float a_Addend) const;
+	Vec4D operator+=(const float a_Addend);
+
+	Vec4D operator-(const Vec4D& a_Vector) const;
+	Vec4D operator-=(const Vec4D& a_Vector);
+	Vec4D operator-(const float a_Subtrahend) const;
+	Vec4D operator-=(const float a_Subtrahend);
 
 	Vec4D operator*(float a_Multiplier);
 	Vec4D& operator*=(float a_Multiplier);
