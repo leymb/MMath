@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "vector_math/mma_vector4D.h"
 
+#include "matrix_math/mma_mat4.h"
+
 /// <summary>	Default constructor. </summary>
 Vec4D::Vec4D() : m_X(0.0f), m_Y(0.0f), m_Z(0.0f), m_W(0.0f)
 {
@@ -32,7 +34,7 @@ Vec4D Vec4D::operator+(const Vec4D& a_Vector) const
 				m_W + a_Vector.m_W};
 }
 
-Vec4D Vec4D::operator+=(const Vec4D& a_Vector)
+Vec4D& Vec4D::operator+=(const Vec4D& a_Vector)
 {
 	m_X += a_Vector.m_X;
 	m_Y += a_Vector.m_Y;
@@ -52,7 +54,7 @@ Vec4D Vec4D::operator+(const float a_Addend) const
 	};
 }
 
-Vec4D Vec4D::operator+=(const float a_Addend)
+Vec4D& Vec4D::operator+=(const float a_Addend)
 {
 	m_X += a_Addend;
 	m_Y += a_Addend;
@@ -70,7 +72,7 @@ Vec4D Vec4D::operator-(const Vec4D& a_Vector) const
 				m_W - a_Vector.m_W};
 }
 
-Vec4D Vec4D::operator-=(const Vec4D& a_Vector)
+Vec4D& Vec4D::operator-=(const Vec4D& a_Vector)
 {
 	m_X -= a_Vector.m_X;
 	m_Y -= a_Vector.m_Y;
@@ -90,7 +92,7 @@ Vec4D Vec4D::operator-(const float a_Subtrahend) const
 	};
 }
 
-Vec4D Vec4D::operator-=(const float a_Subtrahend)
+Vec4D& Vec4D::operator-=(const float a_Subtrahend)
 {
 	m_X -= a_Subtrahend;
 	m_Y -= a_Subtrahend;
@@ -117,6 +119,11 @@ Vec4D& Vec4D::operator*=(const float a_Multiplier)
 
 	return *this;
 }
+
+//Vec4D Vec4D::operator*(Mat4 a_Mat4)
+//{
+//
+//}
 
 /// <summary>	Array indexer operator. </summary>
 /// <param name="a_Index">	Zero-based index of the Vector. </param>

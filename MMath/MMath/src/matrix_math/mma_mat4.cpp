@@ -2,6 +2,8 @@
 #include "pch.h"
 #include "matrix_math/mma_mat4.h"
 
+#include "vector_math/mma_vector4D.h"
+
 // 	|| M00 | M10 | M20 | M30||
 // 	|| M01 | M11 | M21 | M31||
 // 	|| M02 | M12 | M22 | M32||
@@ -47,27 +49,101 @@ float& Mat4::operator()(const int n, const int m)
 	return m_NM_[n][m];
 }
 
+Vec4D& Mat4::operator[](int i)
+{
+	return *reinterpret_cast<Vec4D*>(m_NM_[i]);
+}
+
+//TODO: Fix this
 Mat4& Mat4::operator*=(Mat4& a_Mat4)
 {
-	m_NM_[0][0] *= a_Mat4(0,0);
-	m_NM_[0][1] *= a_Mat4(0, 1);
-	m_NM_[0][2] *= a_Mat4(0, 2);
-	m_NM_[0][3] *= a_Mat4(0, 3);
+	float t_00 =  m_NM_[0][0] * a_Mat4[0][0]
+				+ m_NM_[1][0] * a_Mat4[0][1]
+				+ m_NM_[2][0] * a_Mat4[0][2]
+				+ m_NM_[3][0] * a_Mat4[0][3];
+	float t_01 =  m_NM_[0][1] * a_Mat4[0][0]
+				+ m_NM_[1][1] * a_Mat4[0][1]
+				+ m_NM_[2][1] * a_Mat4[0][2]
+				+ m_NM_[3][1] * a_Mat4[0][3];
+	float t_02 =  m_NM_[0][2] * a_Mat4[0][0]
+				+ m_NM_[1][2] * a_Mat4[0][1]
+				+ m_NM_[2][2] * a_Mat4[0][2]
+				+ m_NM_[3][2] * a_Mat4[0][3];
+	float t_03 =  m_NM_[0][3] * a_Mat4[0][0]
+				+ m_NM_[1][3] * a_Mat4[0][1]
+				+ m_NM_[2][3] * a_Mat4[0][2]
+				+ m_NM_[3][3] * a_Mat4[0][3];
 
-	m_NM_[1][0] *= a_Mat4(1, 0);
-	m_NM_[1][1] *= a_Mat4(1, 1);
-	m_NM_[1][2] *= a_Mat4(1, 2);
-	m_NM_[1][3] *= a_Mat4(1, 3);
+	float t_10 =  m_NM_[0][0] * a_Mat4[1][0]
+				+ m_NM_[1][0] * a_Mat4[1][1]
+				+ m_NM_[2][0] * a_Mat4[1][2]
+				+ m_NM_[3][0] * a_Mat4[1][3];
+	float t_11 =  m_NM_[0][1] * a_Mat4[1][0]
+				+ m_NM_[1][1] * a_Mat4[1][1]
+				+ m_NM_[2][1] * a_Mat4[1][2]
+				+ m_NM_[3][1] * a_Mat4[1][3];
+	float t_12 =  m_NM_[0][2] * a_Mat4[1][0]
+				+ m_NM_[1][2] * a_Mat4[1][1]
+				+ m_NM_[2][2] * a_Mat4[1][2]
+				+ m_NM_[3][2] * a_Mat4[1][3];
+	float t_13 =  m_NM_[0][3] * a_Mat4[1][0]
+				+ m_NM_[1][3] * a_Mat4[1][1]
+				+ m_NM_[2][3] * a_Mat4[1][2]
+				+ m_NM_[3][3] * a_Mat4[1][3];
 
-	m_NM_[2][0] *= a_Mat4(2, 0);
-	m_NM_[2][1] *= a_Mat4(2, 1);
-	m_NM_[2][2] *= a_Mat4(2, 2);
-	m_NM_[2][3] *= a_Mat4(2, 3);
+	float t_20 =  m_NM_[0][0] * a_Mat4[2][0]
+				+ m_NM_[1][0] * a_Mat4[2][1]
+				+ m_NM_[2][0] * a_Mat4[2][2]
+				+ m_NM_[3][0] * a_Mat4[2][3];
+	float t_21 =  m_NM_[0][1] * a_Mat4[2][0]
+				+ m_NM_[1][1] * a_Mat4[2][1]
+				+ m_NM_[2][1] * a_Mat4[2][2]
+				+ m_NM_[3][1] * a_Mat4[2][3];
+	float t_22 =  m_NM_[0][2] * a_Mat4[2][0]
+				+ m_NM_[1][2] * a_Mat4[2][1]
+				+ m_NM_[2][2] * a_Mat4[2][2]
+				+ m_NM_[3][2] * a_Mat4[2][3];
+	float t_23 =  m_NM_[0][3] * a_Mat4[2][0]
+				+ m_NM_[1][3] * a_Mat4[2][1]
+				+ m_NM_[2][3] * a_Mat4[2][2]
+				+ m_NM_[3][3] * a_Mat4[2][3];
 
-	m_NM_[3][0] *= a_Mat4(3, 0);
-	m_NM_[3][1] *= a_Mat4(3, 1);
-	m_NM_[3][2] *= a_Mat4(3, 2);
-	m_NM_[3][3] *= a_Mat4(3, 3);
+	float t_30 =  m_NM_[0][0] * a_Mat4[3][0]
+				+ m_NM_[1][0] * a_Mat4[3][1]
+				+ m_NM_[2][0] * a_Mat4[3][2]
+				+ m_NM_[3][0] * a_Mat4[3][3];
+	float t_31 =  m_NM_[0][1] * a_Mat4[3][0]
+				+ m_NM_[1][1] * a_Mat4[3][1]
+				+ m_NM_[2][1] * a_Mat4[3][2]
+				+ m_NM_[3][1] * a_Mat4[3][3];
+	float t_32 =  m_NM_[0][2] * a_Mat4[3][0]
+				+ m_NM_[1][2] * a_Mat4[3][1]
+				+ m_NM_[2][2] * a_Mat4[3][2]
+				+ m_NM_[3][2] * a_Mat4[3][3];
+	float t_33 =  m_NM_[0][3] * a_Mat4[3][0]
+				+ m_NM_[1][3] * a_Mat4[3][1]
+				+ m_NM_[2][3] * a_Mat4[3][2]
+				+ m_NM_[3][3] * a_Mat4[3][3];
+
+	m_NM_[0][0] = t_00;
+	m_NM_[0][1] = t_01;
+	m_NM_[0][2] = t_02;
+	m_NM_[0][3] = t_03;
+
+	m_NM_[1][0] = t_10;
+	m_NM_[1][1] = t_11;
+	m_NM_[1][2] = t_12;
+	m_NM_[1][3] = t_13;
+
+	m_NM_[2][0] = t_20;
+	m_NM_[2][1] = t_21;
+	m_NM_[2][2] = t_22;
+	m_NM_[2][3] = t_23;
+
+	m_NM_[3][0] = t_30;
+	m_NM_[3][1] = t_31;
+	m_NM_[3][2] = t_32;
+	m_NM_[3][3] = t_33;
 
 	return *this;
 }
@@ -221,27 +297,76 @@ bool Mat4::operator==(Mat4& a_Mat4) const
 	return false;
 }
 
+//TODO: Fix this (t_11)
 Mat4 Mat4::operator*(Mat4& a_Mat4) const
 {
-	float t_00 = m_NM_[0][0] * a_Mat4(0,0);
-	float t_01 = m_NM_[0][1] * a_Mat4(0, 1);
-	float t_02 = m_NM_[0][2] * a_Mat4(0, 2);
-	float t_03 = m_NM_[0][3] * a_Mat4(0, 3);
+	float t_00 =  m_NM_[0][0] * a_Mat4[0][0]
+				+ m_NM_[1][0] * a_Mat4[0][1]
+				+ m_NM_[2][0] * a_Mat4[0][2]
+				+ m_NM_[3][0] * a_Mat4[0][3];
+	float t_01 =  m_NM_[0][1] * a_Mat4[0][0]
+				+ m_NM_[1][1] * a_Mat4[0][1]
+				+ m_NM_[2][1] * a_Mat4[0][2]
+				+ m_NM_[3][1] * a_Mat4[0][3];
+	float t_02 =  m_NM_[0][2] * a_Mat4[0][0]
+				+ m_NM_[1][2] * a_Mat4[0][1]
+				+ m_NM_[2][2] * a_Mat4[0][2]
+				+ m_NM_[3][2] * a_Mat4[0][3];
+	float t_03 =  m_NM_[0][3] * a_Mat4[0][0]
+				+ m_NM_[1][3] * a_Mat4[0][1]
+				+ m_NM_[2][3] * a_Mat4[0][2]
+				+ m_NM_[3][3] * a_Mat4[0][3];
 
-	float t_10 = m_NM_[1][0] * a_Mat4(1, 0);
-	float t_11 = m_NM_[1][1] * a_Mat4(1, 1);
-	float t_12 = m_NM_[1][2] * a_Mat4(1, 2);
-	float t_13 = m_NM_[1][3] * a_Mat4(1, 3);
+	float t_10 =  m_NM_[0][0] * a_Mat4[1][0]
+				+ m_NM_[1][0] * a_Mat4[1][1]
+				+ m_NM_[2][0] * a_Mat4[1][2]
+				+ m_NM_[3][0] * a_Mat4[1][3];
+	float t_11 =  m_NM_[0][1] * a_Mat4[1][0]
+				+ m_NM_[1][1] * a_Mat4[1][1]
+				+ m_NM_[2][1] * a_Mat4[1][2]
+				+ m_NM_[3][1] * a_Mat4[1][3];
+	float t_12 =  m_NM_[0][2] * a_Mat4[1][0]
+				+ m_NM_[1][2] * a_Mat4[1][1]
+				+ m_NM_[2][2] * a_Mat4[1][2]
+				+ m_NM_[3][2] * a_Mat4[1][3];
+	float t_13 =  m_NM_[0][3] * a_Mat4[1][0]
+				+ m_NM_[1][3] * a_Mat4[1][1]
+				+ m_NM_[2][3] * a_Mat4[1][2]
+				+ m_NM_[3][3] * a_Mat4[1][3];
 
-	float t_20 = m_NM_[2][0] * a_Mat4(2, 0);
-	float t_21 = m_NM_[2][1] * a_Mat4(2, 1);
-	float t_22 = m_NM_[2][2] * a_Mat4(2, 2);
-	float t_23 = m_NM_[2][3] * a_Mat4(2, 3);
+	float t_20 =  m_NM_[0][0] * a_Mat4[2][0]
+				+ m_NM_[1][0] * a_Mat4[2][1]
+				+ m_NM_[2][0] * a_Mat4[2][2]
+				+ m_NM_[3][0] * a_Mat4[2][3];
+	float t_21 =  m_NM_[0][1] * a_Mat4[2][0]
+				+ m_NM_[1][1] * a_Mat4[2][1]
+				+ m_NM_[2][1] * a_Mat4[2][2]
+				+ m_NM_[3][1] * a_Mat4[2][3];
+	float t_22 =  m_NM_[0][2] * a_Mat4[2][0]
+				+ m_NM_[1][2] * a_Mat4[2][1]
+				+ m_NM_[2][2] * a_Mat4[2][2]
+				+ m_NM_[3][2] * a_Mat4[2][3];
+	float t_23 =  m_NM_[0][3] * a_Mat4[2][0]
+				+ m_NM_[1][3] * a_Mat4[2][1]
+				+ m_NM_[2][3] * a_Mat4[2][2]
+				+ m_NM_[3][3] * a_Mat4[2][3];
 
-	float t_30 = m_NM_[3][0] * a_Mat4(3, 0);
-	float t_31 = m_NM_[3][1] * a_Mat4(3, 1);
-	float t_32 = m_NM_[3][2] * a_Mat4(3, 2);
-	float t_33 = m_NM_[3][3] * a_Mat4(3, 3);
+	float t_30 =  m_NM_[0][0] * a_Mat4[3][0]
+				+ m_NM_[1][0] * a_Mat4[3][1]
+				+ m_NM_[2][0] * a_Mat4[3][2]
+				+ m_NM_[3][0] * a_Mat4[3][3];
+	float t_31 =  m_NM_[0][1] * a_Mat4[3][0]
+				+ m_NM_[1][1] * a_Mat4[3][1]
+				+ m_NM_[2][1] * a_Mat4[3][2]
+				+ m_NM_[3][1] * a_Mat4[3][3];
+	float t_32 =  m_NM_[0][2] * a_Mat4[3][0]
+				+ m_NM_[1][2] * a_Mat4[3][1]
+				+ m_NM_[2][2] * a_Mat4[3][2]
+				+ m_NM_[3][2] * a_Mat4[3][3];
+	float t_33 =  m_NM_[0][3] * a_Mat4[3][0]
+				+ m_NM_[1][3] * a_Mat4[3][1]
+				+ m_NM_[2][3] * a_Mat4[3][2]
+				+ m_NM_[3][3] * a_Mat4[3][3];
 
 	return {
 				t_00, t_10, t_20, t_30,

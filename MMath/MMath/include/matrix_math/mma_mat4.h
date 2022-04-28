@@ -8,6 +8,7 @@
 /// A column-major 4 x 4 (n x m) matrix
 /// </summary>
 
+class Vec4D;
 class Vec3D;
 class Mat4
 {
@@ -25,9 +26,7 @@ public:
 
 
 	float& operator()(int n, int m);
-
-	//TODO Add access operator as soon as Vec4D is finished
-	//Vec4D& operator[](int i);
+	Vec4D& operator[](int i);
 
 	// TODO: add mathematical operators
 	Mat4& operator*=(Mat4& a_Mat4);
