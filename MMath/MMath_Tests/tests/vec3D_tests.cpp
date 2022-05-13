@@ -23,6 +23,7 @@ protected:
 	Vec3D m_TestVec3D_ = {};
 
 	float m_Divisor_ = 2.0f;
+	float m_Multiplicator_ = 10.f;
 };
 
 TEST_F(Vec3DTestF, Constructor_Empty)
@@ -73,4 +74,28 @@ TEST_F(Vec3DTestF, Operators_DivisionAssignment)
 	EXPECT_FLOAT_EQ(m_TestVec3D_.m_X, t_TempVec.m_X / m_Divisor_);
 	EXPECT_FLOAT_EQ(m_TestVec3D_.m_Y, t_TempVec.m_Y / m_Divisor_);
 	EXPECT_FLOAT_EQ(m_TestVec3D_.m_Z, t_TempVec.m_Z / m_Divisor_);
+}
+
+TEST_F(Vec3DTestF, Operators_MultiplicationFloar)
+{
+	// multiplication
+	m_TestVec3D_ = { 5.f, 1.2f, 3.f };
+
+	const Vec3D t_Product = m_TestVec3D_ * m_Multiplicator_;
+
+	EXPECT_FLOAT_EQ(t_Product.m_X, m_TestVec3D_.m_X * m_Multiplicator_);
+	EXPECT_FLOAT_EQ(t_Product.m_Y, m_TestVec3D_.m_Y * m_Multiplicator_);
+	EXPECT_FLOAT_EQ(t_Product.m_Z, m_TestVec3D_.m_Z * m_Multiplicator_);
+}
+
+TEST_F(Vec3DTestF, Operators_MultiplicationAssignment_FLoat)
+{
+	m_TestVec3D_ = { 5.f, 1.2f, 3.f };
+	const Vec3D t_TempVec = m_TestVec3D_;
+
+	m_TestVec3D_ *= m_Multiplicator_;
+
+	EXPECT_FLOAT_EQ(m_TestVec3D_.m_X, t_TempVec.m_X * m_Multiplicator_);
+	EXPECT_FLOAT_EQ(m_TestVec3D_.m_Y, t_TempVec.m_Y * m_Multiplicator_);
+	EXPECT_FLOAT_EQ(m_TestVec3D_.m_Z, t_TempVec.m_Z * m_Multiplicator_);
 }
