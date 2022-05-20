@@ -2,8 +2,8 @@
 #include <vector_math/mma_vector.h>
 
 TEST(TestCaseName, TestName) {
-
-	Vec3D test = {};
+	testing::FLAGS_gtest_output = "xml";
+	mma::Vec3D test = {};
 	EXPECT_EQ(1, 1);
 	EXPECT_TRUE(true);
 }
