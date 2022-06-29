@@ -1,5 +1,5 @@
 #include "pch.h"
-#include <vector_math/mma_vector.h>
+#include <vector_math/mma_vector3D.h>
 
 TEST(TestCaseName, TestName) {
 	testing::FLAGS_gtest_output = "xml";

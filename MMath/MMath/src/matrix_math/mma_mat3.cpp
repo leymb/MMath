@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "matrix_math/mma_mat3.h"
-#include "vector_math/mma_vector.h"
+#include "vector_math/mma_vector3D.h"
 
 namespace mma
 {

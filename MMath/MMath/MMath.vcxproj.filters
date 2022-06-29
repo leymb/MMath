@@ -21,7 +21,7 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\vector_math\mma_vector.h">
+    <ClInclude Include="include\vector_math\mma_vector3D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\matrix_math\mma_mat3.h">
@@ -33,6 +33,9 @@
     <ClInclude Include="include\vector_math\mma_vector4D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\vector_math\mma_vector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MMath.cpp">
@@ -41,7 +44,7 @@
     <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\vector_math\mma_vector.cpp">
+    <ClCompile Include="src\vector_math\mma_vector3D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\matrix_math\mma_mat3.cpp">
@@ -51,6 +54,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\vector_math\mma_vector4D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\vector_math\mma_vector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
